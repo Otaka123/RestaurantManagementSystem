@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IdentityRole>
+<div class="container my-4">
+    <h2 class="text-center mb-4">إدارة الأدوار</h2>
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> إضافة دور جديد
+        </a>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover text-center">
+        <thead class="table-dark">
+            <tr>
+                <th style="width: 70%;">اسم الدور</th>
+                <th style="width: 30%;">إجراءات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = role.Id })" class="btn btn-warning btn-sm mx-1">
+                            <i class="fas fa-edit"></i> تعديل
+                        </a>
+                        <a href="@Url.Action("Delete", new { id = role.Id })" class="btn btn-danger btn-sm mx-1">
+                            <i class="fas fa-trash-alt"></i> حذف
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+</table>
+</div>
+

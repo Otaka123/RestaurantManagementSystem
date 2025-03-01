@@ -1,0 +1,172 @@
+﻿@using UsersApp.ViewModels
+@model PagedResult<Restaurant>
+@{
+    ViewData["Title"] = "Restaurants";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Restaurants Management</h1>
+            </div>
+            <div class="col-sm-6 text-right">
+                <a asp-action="CreateOrEdit" class="btn btn-primary">
+                    <i class="fas fa-plus mr-2"></i>Create New
+                </a>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-utensils mr-2"></i>
+                            Restaurants List
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <i class="icon fas fa-check"></i> @TempData["SuccessMessage"]
+                            </div>
+                        }
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <i class="icon fas fa-ban"></i> @TempData["ErrorMessage"]
+                            </div>
+                        }
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        @* <th>Description</th> *@
+                                        <th>City</th>
+                                        <th>Food Type</th>
+                                        <th>Image</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Items.Any())
+                                    {
+                                        @foreach (var item in Model.Items)
+                                        {
+                                            <tr>
+                                                <td class="text-truncate">@item.Name</td>
+                                                <td class="text-truncate">@item.Location</td>
+                                                @* <td class="text-truncate" style="max-width: 200px;">@item.Description</td> *@
+                                                <td>@item.City?.Name</td>
+                                                <td>@item.RestaurantType?.Name</td>
+                                                <td class="text-center">
+                                                    @if (!string.IsNullOrEmpty(item.Picture))
+                                                    {
+                                                        <img src="@item.Picture"
+                                                             class="img-thumbnail elevation-2"
+                                                             style="width: 80px; height: 60px; object-fit: cover;"
+                                                             alt="Restaurant image">
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-muted">No Image</span>
+                                                    }
+                                                </td>
+                                                <td class="text-center ">
+                                                    <div class="d-flex justify-content-around align-items-center">
+                                                        <a asp-action="CreateOrEdit"
+                                                           asp-route-id="@item.Id"
+                                                           class="btn btn-sm btn-warning m-0">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+
+                                                        <form asp-action="SoftDelete"
+                                                              asp-route-id="@item.Id"
+                                                              method="post"
+                                                              onsubmit="return confirm('Are you sure you want to delete?');">
+                                                            @Html.AntiForgeryToken()
+                                                            <button type="submit"
+                                                                    class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+
+                                                        <a asp-controller="Dishes"
+                                                           asp-action="Index"
+                                                           asp-route-id="@item.Id"
+                                                           class="btn btn-sm btn-success m-0">
+                                                            <i class="fas fa-utensils"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="7" class="text-center py-4">
+                                                <div class="alert alert-info">
+                                                    <i class="icon fas fa-info-circle"></i>
+                                                    No restaurants found
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                <a class="page-link"
+                                   asp-action="Index"
+                                   asp-route-page="@(Model.PageNumber - 1)">
+                                    &laquo;
+                                </a>
+                            </li>
+
+                            @for (int i = 1; i <= Math.Ceiling((double)Model.TotalCount / Model.PageSize); i++)
+                            {
+                                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                    <a class="page-link"
+                                       asp-action="Index"
+                                       asp-route-page="@i"
+                                       asp-route-ownerId="@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value">
+                                        @i
+                                    </a>
+                                </li>
+                            }
+
+                            <li class="page-item @(Model.PageNumber >= Math.Ceiling((double)Model.TotalCount / Model.PageSize) ? "disabled" : "")">
+                                <a class="page-link"
+                                   asp-action="Index"
+                                   asp-route-page="@(Model.PageNumber + 1)">
+                                    &raquo;
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>

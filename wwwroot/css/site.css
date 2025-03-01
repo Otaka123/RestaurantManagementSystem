@@ -1,0 +1,671 @@
+﻿
+:root {
+    --main-color: #19c8fa;
+    --transparent-color: rgb(15 116 143 / 70%);
+    --dark-color: #19283f;
+    --main-color: #33d1cc;
+    --red-color: #ff3150;
+    --Secound-color: #ffc400;
+    --section-color: #eff7fa;
+    --textcolor: white;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    /*    font-family: "Roboto", serif;
+    position: relative;*/
+    font-family: Roboto, -apple-system, sans-serif;
+    position:relative;
+    background-color: black;
+}
+
+.btn:focus,
+.btn:hover{
+    transform: scale(0.97);
+
+}
+.navbar {
+position:relative;
+z-index:5;
+    
+}
+.btn-custom {
+    background-color: #edb77d;
+    color: white;
+    font-size: 18px;
+    border: none;
+    transition: background 0.3s;
+}
+
+    .btn-custom:hover {
+        background-color: #d49c65;
+        color: black;
+    }
+    .container-view{
+        color:black;
+
+    }
+/*.btn {
+    white-space: normal;*/ /* يسمح بالتفاف النص داخل الزر */
+/*word-wrap: break-word;*/ /* يضمن انكسار الكلمات الطويلة */
+/*word-break: break-word;*/ /* يكسر الكلمات الطويلة إذا لم تستطع الالتفاف */
+/*text-align: center;
+}*/
+/*@media (min-width: 768px) {  من شاشات md وما فوق 
+    .btn {
+        font-size: 15px;
+            
+    }
+}
+
+@media (min-width: 1024px) {  من شاشات lg وما فوق 
+    .btn {
+        font-size: 18px;
+        
+                padding: 12px 24px;
+    }
+    }
+}*/
+
+*, a {
+    color: var(--textcolor);
+}
+a:hover {
+    color: var(--textcolor);
+}
+.navbar-nav .nav-link {
+    color: var(--textcolor);
+    transition: color 0.3s ease-in-out;
+    font-weight: 150;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #ffc107;
+    transform: scale(0.97);
+    /* تغيير اللون عند التمرير */
+}
+
+.navbar-nav .nav-link.active {
+    /*color: #ff9800*/ /* إبراز الصفحة النشطة */
+    /*}*/
+    color: #ffc400;
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+@media (min-width: 576px) {
+    .navbar-collapse {
+        background: transparent !important; /* اجعل الخلفية شفافة عند الشاشات الكبيرة */
+    }
+}
+@media (max-width: 575px) { /* فقط للشاشات الصغيرة */
+
+    .navbar-collapse {
+        transition: transform 0.15s ease-out, opacity 0.15s ease-out, height 0.15s ease-out;
+        transform: translateY(-20px);
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+    }
+}
+
+/* عند الفتح */
+.navbar-collapse.show {
+    background-color: rgba(128, 128, 128, 0.8);
+    border-radius: 10px;
+    transform: translateY(0);
+    padding: 10px;
+    opacity: 1;
+    height: auto;
+}
+
+/* تأثير الإغلاق */
+.navbar-collapse.closing {
+    transform: translateY(-20px);
+    opacity: 0;
+    height: 0;
+}
+
+
+.firstsec {
+    min-height: 100vh;
+    /*    background-c: linear-gradient(to bottom, rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 0.8) 40% ),url('/images/OrdersImages/background.jpg');
+    background-image: url('/images/OrdersImages/background.jpg');
+    background-size: cover;
+    background-position: center;*/
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 0) 20%), url('/images/OrdersImages/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+.img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50px;
+    height: 200px;
+}
+
+
+.firstsec .container .burger {
+    max-width: 100%; /* منع الصورة من تجاوز حجم العمود */
+}
+
+.title {
+    /*font-size: clamp(22px, 3vw, 48px);
+white-space: nowrap;
+ يمنع التفاف النص */
+    white-space: nowrap;
+    font-weight: 800;
+}
+.responsive {
+    font-size: clamp(8px, 3vw, 9px); /* يقلل الحجم تلقائيًا عند الحاجة */
+    white-space: nowrap;
+    /* يمنع انقسام الكلمات */
+}
+
+.responsive-title {
+    font-weight: 800;
+    /*font-size: clamp(10px, 4vw, 20px);*/ /* يصغر النص إذا كان كبيرًا جدًا */
+    /*white-space: nowrap;*/
+    white-space:nowrap;
+    max-width: 100%;
+    text-transform: uppercase;
+    /* يمنع انقسام الكلمات */
+}
+.line {
+    position: relative; /* لجعل ::after يتمركز بناءً عليه */
+    display: inline-block; /* ليأخذ حجمه الطبيعي */
+    text-align: center;
+}
+
+.line::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* المسافة بين النص والخط */
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 100%; /* يجعل الطول يتكيف مع النص */
+    height: 2px;
+    background-color: var(--Secound-color);
+}
+
+.overlay {
+    /*    position: absolute;
+z-index: -1;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;*/
+    /* لمنع التأثير على التفاعل مع العناصر تحته */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* يغطي الارتفاع بالكامل */
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 30% );
+    pointer-events: none;
+    z-index: -2;
+}
+
+
+
+
+.Secondsec {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.fourthsec {
+    min-height: 100vh;
+    background-image: url('/images/OrdersImages/chef.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+.rounded-circle:hover,
+.rounded-circle:focus
+{
+    transform:scale(0.97);
+    cursor:pointer;
+}
+.overlaybackground {
+    /*    position: absolute;
+z-index: -1;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;*/
+    /* لمنع التأثير على التفاعل مع العناصر تحته */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 110vh; /* يغطي الارتفاع بالكامل */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 8%, rgba(0, 0, 0, 0.8) 40% );
+/*    background: rgba(0, 0, 0, 0.8);*/
+    pointer-events: none;
+    z-index: -2;
+}
+.fiveec {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+.sixsec {
+    min-height: 30vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.subscribe {
+    background-color: var(--yellow-color);
+}
+
+.subscribe input[type="text"] {
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+.subscribe input[type="text"]:focus {
+    outline: none;
+}
+
+.subscribe ::placeholder {
+    color: white;
+}
+
+.subscribe input[type="submit"] {
+    background-color: var(--dark-color);
+    color: var(--yellow-color);
+}
+.footer {
+}
+
+    .footer .copyright > span {
+        color: var(--Secound-color);
+    }
+
+    .footer .copyright div span {
+        color: var(--yellow-color);
+    }
+
+   
+
+    .footer .facebook {
+        background-color: #1877f2;
+    }
+
+    .footer .twitter {
+        background-color: #1da1f2;
+    }
+
+    .footer .linkedin {
+        background-color: #0077b5;
+    }
+
+    .footer .youtube {
+        background-color: #ff0000;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.form-section {
+    padding: 2rem;
+    background-color: #222;
+    color: white;
+}
+
+/* تصميم input group */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* تصميم input */
+.form-input input {
+    width: 100%;
+    background-color: transparent !important; /* خلفية شفافة */
+    border: none;
+    border-bottom: 2px solid #ccc; /* لون افتراضي للحد السفلي */
+    border-radius: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.form-text {
+    width: 100%;
+    background-color: transparent !important; /* خلفية شفافة */
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    min-height: 20vh;
+    color: white;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+}
+
+    .form-text:active,
+    .form-text:focus {
+        border-color: #edb77d;
+        outline: none;
+        box-shadow: none;
+    }
+/* عند التركيز، تغيير لون الحد السفلي */
+.form-input input:focus {
+    border-bottom-color: #edb77d !important;
+    outline: none;
+    box-shadow: none;
+}
+/* تصميم label */
+.form-input .form-label {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 16px;
+    pointer-events: none;
+}
+
+.form-control-file {
+    background-color: antiquewhite
+}
+/* عند التركيز أو عند وجود قيمة في الحقل */
+.form-input input:focus + .form-label,
+.form-input input:not(:placeholder-shown) + .form-label {
+    top: 0;
+    font-size: 14px;
+    color: #edb77d; /* تغيير اللون */
+}
+
+/* تصميم الزر */
+.btn-custom {
+    background-color: #edb77d;
+    color: white;
+    font-size: 18px;
+    border: none;
+    transition: background 0.3s;
+}
+
+    .btn-custom:hover {
+        background-color: #d49c65;
+        color: black;
+    }
+/* إزالة الأسهم في Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* إزالة الأسهم في Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+    background-color: transparent !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/*a {
+    color: #edb77d;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 14px;
+    display: block;
+    transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+}*/
+
+/*    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: underline;
+        color: #edb77d;
+    }*/
+
+
+.custom-radio {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: #edb77d;
+}
+
+.radio-btn {
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+}
+
+    .radio-btn svg {
+        display: none;
+    }
+
+    .radio-btn.active {
+        background-color: #edb77d;
+        color: white;
+    }
+
+
+.form-control {
+    border: 2px solid #edb77d;
+    border-radius: 25px;
+    background-color: #edb77d;
+    color: black;
+}
+
+    .form-control:hover,
+    .form-control:active,
+    .form-control:focus {
+        background-color: #C88F5E;
+    }
+
+.form-select {
+    border: 2px dashed white;
+    background-color: #222;
+    ;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+    .form-select:hover,
+    .form-select:active,
+    .form-select:focus {
+        color: #edb77d;
+        border-color: #edb77d;
+        outline: none;
+        box-shadow: none;
+    }
+
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed white;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+    input[type="file"]:hover,
+    input[type="file"]:active,
+    input[type="file"]:focus {
+        border-color: #edb77d;
+        outline: none;
+        box-shadow: none;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        background-color: #edb77d;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        input[type="file"]::-webkit-file-upload-button:hover {
+            background-color: #d49c65;
+            color: black;
+        }
+
+.table-header {
+    background-color: #edb77d;
+    border: 2px solid #edb77d;
+}
+
+.table-responsive.custom-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-responsive.custom-scroll::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+.table-responsive.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 10px;
+    border: 2px solid #f8f9fa;
+}
+
+    .table-responsive.custom-scroll::-webkit-scrollbar-thumb:hover {
+        background-color: #0056b3;
+    }
+
+.table-responsive.custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #edb77d #f8f9fa;
+}
+
+
+
+
+
+/* تخصيص العنصر العام للترقيم */
+.page-item {
+    margin: 0 5px; /* مسافة بين العناصر */
+}
+
+/* تخصيص الرابط داخل كل عنصر */
+.page-link {
+    color: #edb77d; /* لون النص */
+    background-color: #f9dcc3; /* لون الخلفية الافتراضية */
+    border: 1px solid #f3caa0; /* لون الحدود */
+    border-radius: 8px; /* حواف دائرية */
+    padding: 8px 16px; /* حجم التباعد الداخلي */
+    transition: background-color 0.3s, color 0.3s; /* حركة انتقالية ناعمة */
+}
+
+    /* تغيير شكل العنصر عند التمرير */
+    .page-link:hover {
+        background-color: #f3caa0; /* خلفية أغمق قليلاً عند التمرير */
+        color: white; /* نص أبيض عند التمرير */
+        border-color: #edb77d;
+    }
+
+/* تخصيص العنصر النشط */
+.page-item.active .page-link {
+    background-color: #edb77d; /* اللون النشط */
+    color: white; /* نص أبيض */
+    border-color: #edb77d;
+}
+
+/* تعطيل الروابط (في حالة الصفحات غير النشطة) */
+.page-item.disabled .page-link {
+    color: #b5a08b; /* لون رمادي فاتح */
+    background-color: #f0e8e0; /* خلفية فاتحة */
+    border-color: #f3caa0;
+    cursor: not-allowed;
+}
+
+
+.dish-image {
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+}
+
+.card-filter {
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #222;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.card-filter:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #222;
+
+}
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+.rating {
+    font-size: 0.9rem;
+}
+
+
+.form-section {
+    padding: 2rem;
+    background-color: #222;
+    color: white;
+}

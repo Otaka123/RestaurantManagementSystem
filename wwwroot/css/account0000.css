@@ -1,0 +1,415 @@
+﻿/*.account-container {
+    background-image: url('/images/OrdersImages/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-y;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.account-box {
+    background-color: gray;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    opacity: .9;
+}
+
+*/
+.account {
+    min-height: 100vh;
+    background-image: url('/images/OrdersImages/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    color: white;
+}
+.table-responsive{
+    border-radius:15px;
+}
+table tr:hover {
+    background-color: #d49c65;
+    color: black;
+    cursor: pointer;
+}
+.form-section {
+    padding: 2rem;
+    background-color: #222;
+    color: white;
+}
+
+/* تصميم input group */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* تصميم input */
+.form-input input {
+    width: 100%;
+    background-color: transparent !important; /* خلفية شفافة */
+    border: none;
+    border-bottom: 2px solid #ccc; /* لون افتراضي للحد السفلي */
+    border-radius: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    color: white;
+}
+.form-text {
+    width: 100%;
+    background-color: transparent !important; /* خلفية شفافة */
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    min-height: 20vh;
+    color: white;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+}
+    .form-text:active,
+    .form-text:focus {
+        border-color: #edb77d;
+        outline: none;
+        box-shadow: none;
+    }
+    /* عند التركيز، تغيير لون الحد السفلي */
+    .form-input input:focus {
+        border-bottom-color: #edb77d !important;
+        outline: none;
+        box-shadow: none;
+    }
+/* تصميم label */
+.form-input .form-label {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 16px;
+    pointer-events: none;
+    
+}
+.form-control-file{
+    background-color:antiquewhite
+        
+}
+/* عند التركيز أو عند وجود قيمة في الحقل */
+.form-input input:focus + .form-label,
+.form-input input:not(:placeholder-shown) + .form-label {
+    top: 0;
+    font-size: 14px;
+    color: #edb77d; /* تغيير اللون */
+}
+
+/* تصميم الزر */
+.btn-custom {
+    background-color: #edb77d;
+    color: white;
+    font-size: 18px;
+    border: none;
+    transition: background 0.3s;
+}
+
+.btn-custom:hover {
+    background-color: #d49c65;
+    color:black;
+
+}
+/* إزالة الأسهم في Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* إزالة الأسهم في Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+    background-color: transparent !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+a {
+    
+    color: #edb77d;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 14px;
+    display: block;
+    transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: underline;
+    color: #edb77d;
+}
+
+
+.custom-radio {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: #edb77d;
+}
+
+.radio-btn {
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+
+}
+
+.radio-btn svg {
+    display: none;
+}
+
+.radio-btn.active {
+    background-color: #edb77d;
+    color:white;
+}
+
+
+.form-control {
+    border: 2px solid #edb77d;
+    border-radius:25px;
+    background-color: #edb77d;
+    color:black;
+}
+    .form-control:hover,
+    .form-control:active,
+    .form-control:focus {
+        background-color: #C88F5E;
+    }
+.form-select {
+        border: 2px dashed white;
+        background-color: transparent;
+        color: white;
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+    }
+.form-select:hover,
+.form-select:active,
+.form-select:focus {
+    color: black;
+    border-color: #edb77d;
+    outline: none;
+    box-shadow: none;
+}
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed white;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+input[type="file"]:hover,
+input[type="file"]:active,
+input[type="file"]:focus {
+    border-color: #edb77d;
+    outline: none;
+    box-shadow: none;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background-color: #edb77d;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+ input[type="file"]::-webkit-file-upload-button:hover {
+     background-color: #d49c65;
+     color: black;
+ }
+
+.table-header {
+    background-color: #edb77d;
+    border: 2px solid #edb77d;
+}
+
+.table-responsive.custom-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-responsive.custom-scroll::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+.table-responsive.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 10px;
+    border: 2px solid #f8f9fa;
+}
+
+    .table-responsive.custom-scroll::-webkit-scrollbar-thumb:hover {
+        background-color: #0056b3;
+    }
+
+.table-responsive.custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #edb77d #f8f9fa;
+}
+
+
+
+
+
+/* تخصيص العنصر العام للترقيم */
+.page-item {
+    margin: 0 5px; /* مسافة بين العناصر */
+}
+
+/* تخصيص الرابط داخل كل عنصر */
+.page-link {
+    color: #edb77d; /* لون النص */
+    background-color: #f9dcc3; /* لون الخلفية الافتراضية */
+    border: 1px solid #f3caa0; /* لون الحدود */
+    border-radius: 8px; /* حواف دائرية */
+    padding: 8px 16px; /* حجم التباعد الداخلي */
+    transition: background-color 0.3s, color 0.3s; /* حركة انتقالية ناعمة */
+}
+
+    /* تغيير شكل العنصر عند التمرير */
+.page-link:hover {
+    background-color: #f3caa0; /* خلفية أغمق قليلاً عند التمرير */
+    color: white; /* نص أبيض عند التمرير */
+    border-color: #edb77d;
+}
+
+/* تخصيص العنصر النشط */
+.page-item.active .page-link {
+    background-color: #edb77d; /* اللون النشط */
+    color: white; /* نص أبيض */
+    border-color: #edb77d;
+}
+
+/* تعطيل الروابط (في حالة الصفحات غير النشطة) */
+.page-item.disabled .page-link {
+    color: #b5a08b; /* لون رمادي فاتح */
+    background-color: #f0e8e0; /* خلفية فاتحة */
+    border-color: #f3caa0;
+    cursor: not-allowed;
+}
+
+
+
+
+.cardr {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 16, 0.19), 0 0.3rem 0.3rem rgba(0, 0, 16, 0.23);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 16, 0.19), 0 0.3rem 0.3rem rgba(0, 0, 16, 0.23);
+    background-color: rgb(255, 255, 255);
+    padding: 0.8rem;
+    width: 30rem;
+}
+
+.rating-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.4rem 0.8rem;
+    width: 100%;
+}
+
+
+
+.ratingbar {
+    background-color: rgba(0, 0, 16, 0.8);
+    padding: 0.4rem 0.4rem 0.1rem 0.4rem;
+    border-radius: 2.2rem;
+}
+
+svg {
+    fill: rgb(242, 242, 242);
+    height: 2.3rem;
+    width: 2.6rem;
+    margin: 0.2rem;
+}
+
+.rating-form-2 svg {
+    height: 3rem;
+    width: 3rem;
+    margin: 0.5rem;
+}
+
+
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+    input[type="radio"] + svg {
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+    }
+
+input + svg {
+    cursor: pointer;
+}
+
+input[class="super-happy"]:hover + svg,
+input[class="super-happy"]:checked + svg,
+input[class="super-happy"]:focus + svg {
+    fill: rgb(0, 109, 217);
+}
+
+input[class="happy"]:hover + svg,
+input[class="happy"]:checked + svg,
+input[class="happy"]:focus + svg {
+    fill: rgb(0, 204, 79);
+}
+
+input[class="neutral"]:hover + svg,
+input[class="neutral"]:checked + svg,
+input[class="neutral"]:focus + svg {
+    fill: rgb(232, 214, 0);
+}
+
+input[class="sad"]:hover + svg,
+input[class="sad"]:checked + svg,
+input[class="sad"]:focus + svg {
+    fill: rgb(229, 132, 0);
+}
+
+input[class="super-sad"]:hover + svg,
+input[class="super-sad"]:checked + svg,
+input[class="super-sad"]:focus + svg {
+    fill: rgb(239, 42, 16);
+}
+

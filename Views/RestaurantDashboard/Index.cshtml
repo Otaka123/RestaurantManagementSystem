@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Index Page";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container">
+    <h2>إحصائيات المطاعم</h2>
+    <div class="form-group">
+        <label for="restaurantSelect">اختر مطعماً:</label>
+        <select id="restaurantSelect" class="form-control">
+            <option value="">-- اختر مطعماً --</option>
+            @if (ViewBag.Restaurants != null)
+            {
+                var selectedId = Context.Request.Query["restaurantId"];
+                @foreach (var restaurant in ViewBag.Restaurants)
+                {
+                    <option value="@restaurant.Value"
+                            selected="@(restaurant.Value == selectedId ? "selected" : null)">
+                        @restaurant.Text
+                    </option>
+                }
+            }
+        </select>
+    </div>
+</div>
+   
+
+@section Scripts {
+    <script>
+                            $(document).ready(function () {
+            // تعيين القيمة المحددة من الـ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const restaurantId = urlParams.get('restaurantId');
+            if (restaurantId) {
+                $('#restaurantSelect').val(restaurantId);
+            }
+
+            // عند تغيير الاختيار
+            $('#restaurantSelect').change(function () {
+                const id = $(this).val();
+                if (id) {
+                    window.location.href = `/Restaurants/GetStatistics?restaurantId=${id}`;
+                }
+            });
+        });
+    </script>
+}

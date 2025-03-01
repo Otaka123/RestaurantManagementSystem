@@ -1,0 +1,183 @@
+﻿@using UsersApp.ViewModels.restaurant
+@model DishIndexViewModel
+
+@{
+    ViewData["Title"] = "Order Food";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+
+}
+
+<div class="container container-view mt-5">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <!-- فلترة البحث -->
+    <form asp-action="Index" method="get" class="card-filter  mb-3 p-3 shadow-sm">
+        <div class="row d-flex align-items-end">
+
+            <!-- شريط البحث -->
+            <div class="col-md-3">
+                <label class="form-label">بحث عن طبق:</label>
+                <input asp-for="Filter.SearchTerm" type="text" class="form-control" placeholder="اسم الطبق...">
+            </div>
+
+            <!-- المطعم -->
+            <div class="col-md-3">
+                <label class="form-label">المطعم:</label>
+                <select asp-for="Filter.RestaurantId" asp-items="Model.Restaurants" class="form-select text-black">
+                    <option value="">كل المطاعم</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">نطاق السعر:</label>
+                <div class="input-group">
+                    <input asp-for="Filter.MinPrice" type="number" class="form-control" placeholder="الحد الأدنى">
+                    <input asp-for="Filter.MaxPrice" type="number" class="form-control" placeholder="الحد الأقصى">
+                </div>
+            </div>
+            <!-- نوع المطعم -->
+            @* <div class="col-md-3"> *@
+            @*     <label class="form-label">نوع المطعم:</label> *@
+            @*     <select asp-for="Filter.RestaurantTypeId" class="form-select"> *@
+            @*         <option value="">كل الأنواع</option> *@
+            @*         <option value="1">مطاعم سريعة</option> *@
+            @*         <option value="2">مطاعم عائلية</option> *@
+            @*         <option value="3">كافيهات</option> *@
+            @*     </select> *@
+            @* </div> *@
+
+            @* <!-- تصنيف الأطباق --> *@
+            @* <div class="col-md-3"> *@
+            @*     <label class="form-label">التصنيف:</label> *@
+            @*     <select asp-for="Filter.CategoryId" class="form-select"> *@
+            @*         <option value="">كل التصنيفات</option> *@
+            @*         <option value="1">وجبات رئيسية</option> *@
+            @*         <option value="2">مشروبات</option> *@
+            @*         <option value="3">حلويات</option> *@
+            @*     </select> *@
+            @* </div> *@
+
+            <!-- الترتيب حسب -->
+            <div class="col-md-2">
+                <label class="form-label">الترتيب حسب:</label>
+                <select asp-for="Filter.SortBy" class="form-select">
+                    <option value="name">الاسم</option>
+                    <option value="price">السعر</option>
+                    <option value="rating">التقييم</option>
+                </select>
+            </div>
+
+            <!-- اتجاه الترتيب -->
+            @* <div class="col-md-2"> *@
+            @*     <label class="form-label">اتجاه الترتيب:</label> *@
+            @*     <select asp-for="Filter.SortDirection" class="form-select"> *@
+            @*         <option value="asc">تصاعدي</option> *@
+            @*         <option value="desc">تنازلي</option> *@
+            @*     </select> *@
+            @* </div> *@
+
+            <!-- نطاق السعر -->
+        
+
+            <!-- أزرار التحكم -->
+            <div class=" mt-3 d-flex justify-content-between align-items-center">
+                <button type="submit" class="btn btn-custom">
+                    <i class="fas fa-filter"></i> تطبيق
+                </button>
+                <a href="@Url.Action("Index", new { resetFilter = "true" })" class="btn btn-outline-danger">
+                    <i class="fas fa-times"></i> إعادة التعيين
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <!-- عرض الأطباق -->
+    <div class="row">
+        @if (Model.PagedDishes?.Items?.Any() == true)
+        {
+            foreach (var dish in Model.PagedDishes.Items)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow h-100">
+                        <a asp-action="Details" asp-controller="Dishes" asp-route-dishId="@dish.Id" class="text-decoration-none">
+                            <img src="@dish.PictureUrl" class="card-img-top dish-image img-fluid" style="height:12rem" alt="@dish.Name">
+                        </a>
+
+                        <div class="card-body d-flex flex-column  " >
+                            <h5 class="card-title">@dish.Name</h5>
+                            <div class="rating">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <i class="fas fa-star @(i < dish.AverageRating ? "text-warning" : "text-secondary")"></i>
+                                }
+                            </div>
+                            <p class="card-text text-muted">@dish.Description</p>
+
+                           
+
+                            <!-- زر Add to Cart -->
+                            <div class="mt-auto">
+                                <div class="mt-auto mb-2 d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-info">
+                                        <i class="fas fa-utensils"></i> @dish.RestaurantName
+                                    </span>
+                                    <span class="h5 text-warning">@dish.Price.ToString("C")</span>
+                                </div>
+                                <form asp-action="AddItem" asp-route-dishId="@dish.Id" asp-controller="Cart" method="post">
+                                    <button class="btn w-100 btn-custom">
+                                        <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- عرض عدد النتائج -->
+            <div class="d-flex justify-content-between mb-3">
+                <div class="text-muted">
+                    عرض @Model.PagedDishes.Items.Count() من @Model.PagedDishes.TotalCount نتيجة
+                </div>
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">إعادة التعيين</a>
+            </div>
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-warning">لا توجد أطباق متاحة</div>
+            </div>
+        }
+    </div>
+
+    <!-- التقسيم إلى صفحات -->
+    @if (Model.PagedDishes?.TotalCount > 0)
+    {
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                @if (Model.PagedDishes.HasPrevious)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { PageNumber = Model.PagedDishes.PageNumber - 1 })">السابق</a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= Model.PagedDishes.TotalCount; i++)
+                {
+                    <li class="page-item @(i == Model.PagedDishes.PageNumber ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { PageNumber = i })">@i</a>
+                    </li>
+                }
+
+                @if (Model.PagedDishes.HasNext)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { PageNumber = Model.PagedDishes.PageNumber + 1 })">التالي</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+</div>

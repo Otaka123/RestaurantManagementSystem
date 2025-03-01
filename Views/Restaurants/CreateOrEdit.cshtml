@@ -1,0 +1,255 @@
+﻿@using UsersApp.Resourses
+@using UsersApp.ViewModels.Restaurant
+@model CreateRestaurantViewModel
+
+@{
+    ViewData["Title"] = "Create Restaurant";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+}
+<div class="account">
+    <div class="container mt-4 form-section ">
+        <h2>@(Model.Id == Guid.Empty ? "Create New Restaurant" : "Update Restaurant")</h2>
+
+        <form asp-action="CreateOrEdit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3 form-group form-input">
+                <input value="@Model.Name" asp-for="Name" placeholder=" " required />
+                <label asp-for="Name" class="form-label"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        
+
+            <div class="form-group form-input">
+                <input value="@Model.Location" asp-for="Location" placeholder=" " required />
+                <label asp-for="Location" class="form-label"></label>
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-input">
+
+                <textarea asp-for="Description" value="@Model.Description" placeholder="Description" class="form-text"></textarea>
+
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mt-3 text-center position-relative d-inline-block">
+               
+                @if (!string.IsNullOrEmpty(Model.Pictureurl))
+                {
+                        <img src="@Model.Pictureurl" id="previewImage" class="img-thumbnail" style="width: 150px; height: 150px;" alt="معاينة الصورة">
+                        <button id="deleteImage" type="button" class="btn btn-danger btn-sm position-absolute" style="top: 0; right: 0;">
+                            &times;
+                        </button>
+                }
+                else
+                {
+                    <img id="previewImage" class="img-thumbnail d-none" style="width: 150px; height: 150px;" alt="معاينة الصورة">
+                    <button id="deleteImage" type="button" class="btn btn-danger btn-sm position-absolute" style="top: 0; right: 0; display: none;">
+                        &times;
+                    </button>
+                }
+               
+            </div>
+            <div class="mb-3">
+                <label asp-for="Picture" class="form-label"></label>
+                <input type="file" asp-for="Picture" class="form-control-file" id="fileInput" accept="image/*" />
+            </div>
+         
+
+            @if (Model.option != null && Model.option.Schedules != null)
+                {
+                    <div class="row mb-3">
+                        <div class="col-6 mb-3">
+                            <label asp-for="CityId" class="form-label">اختر المدينة</label>
+                            <select asp-for="CityId" asp-items="Model.option.Cities" class="form-select">
+                                <option selected disabled>اختر مدينة...</option>
+                            </select>
+                            <span asp-validation-for="CityId" class="text-danger"></span>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label asp-for="RestaurantTypeId" class="form-label">اختر نوع المطعم</label>
+                            <select asp-for="RestaurantTypeId" asp-items="Model.option.RestaurantTypes" class="form-select">
+                                <option selected disabled>اختر نوع المطعم...</option>
+                            </select>
+                            <span asp-validation-for="RestaurantTypeId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <table class="table text-white ">
+                            <thead class="table-header ">
+                                <tr>
+                                    <th>اليوم</th>
+                                    <th>مفتوح؟</th>
+                                    <th>وقت الفتح</th>
+                                    <th>وقت الإغلاق</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                    @for (int i = 0; i < Model.option.Schedules.Count; i++)
+                                    {
+                                        <tr>
+                                        <td class="text-white">@Model.localizedDays[i]</td>
+
+                                            <!-- اختيار ما إذا كان اليوم مفتوح أم لا -->
+                                            <td>
+                                                <label>
+                                                    <input type="radio" name="Schedules[@i].IsOpen" value="true" class="is-open-radio" @(Model.option.Schedules[i].IsOpen ? "checked" : "") /> نعم
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="Schedules[@i].IsOpen" value="false" class="is-open-radio" @(!Model.option.Schedules[i].IsOpen ? "checked" : "") /> لا
+                                                </label>
+                                            </td>
+
+                                            <!-- إدخال وقت الفتح -->
+                                            <td>
+                                                <input type="time"
+                                                       name="Schedules[@i].OpeningTime"
+                                                       value="@Model.option.Schedules[i].OpeningTime"
+                                                       class="form-control opening-time"
+                                                @(Model.option.Schedules[i].IsOpen ? "" : "disabled") />
+                                                <span asp-validation-for="Schedules[@i].OpeningTime" class="text-danger"></span>
+                                            </td>
+
+                                            <!-- إدخال وقت الإغلاق -->
+                                            <td>
+                                                <input type="time"
+                                                       name="Schedules[@i].ClosingTime"
+                                                       value="@Model.option.Schedules[i].ClosingTime"
+                                                       class="form-control closing-time"
+                                                @(Model.option.Schedules[i].IsOpen ? "" : "disabled") />
+                                                <span asp-validation-for="Schedules[@i].ClosingTime" class="text-danger"></span>
+                                            </td>
+
+                                            <!-- إرسال قيمة DayOfWeek المخفية -->
+                                            <input type="hidden" name="Schedules[@i].DayOfWeek" value="@Model.option.Schedules[i].DayOfWeek" />
+                                        </tr>
+                                    }
+                                
+                                
+                               
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+                      
+
+
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">⚠️ لا توجد بيانات لعرضها.</td>
+                </tr>
+            }
+          
+
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-light ">Save</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    
+    <script>
+        // window.onload = function () {
+        //     document.querySelectorAll('.is-open-radio').forEach(function (radio) {
+        //         radio.addEventListener('change', function () {
+        //             const tr = this.closest('tr');
+        //             const isOpen = this.value === 'true' && this.checked;
+
+        //             tr.querySelectorAll('.opening-time, .closing-time').forEach(function (input) {
+        //                 input.disabled = !isOpen;
+        //                 input.required = isOpen;
+        //             });
+        //         });
+        //     });
+
+        //     تطبيق الحالة الافتراضية عند تحميل الصفحة
+        //     document.querySelectorAll('.is-open-radio:checked').forEach(function (radio) {
+        //         const tr = radio.closest('tr');
+        //         const isOpen = radio.value === 'true';
+
+        //         tr.querySelectorAll('.opening-time, .closing-time').forEach(function (input) {
+        //             input.disabled = !isOpen;
+        //             input.required = isOpen;
+        //         });
+        //     });
+        // };
+                document.addEventListener('DOMContentLoaded', function () {
+            // عند تحميل الصفحة، اضبط حالة الحقول بناءً على IsOpen
+            document.querySelectorAll('.is-open-radio').forEach(function (radio) {
+                radio.addEventListener('change', function () {
+                    const tr = this.closest('tr');
+                    const isOpen = this.value === 'true' && this.checked;
+
+                    // تفعيل أو تعطيل حقول الأوقات بناءً على قيمة IsOpen
+                    tr.querySelectorAll('.opening-time, .closing-time').forEach(function (input) {
+                        input.disabled = !isOpen;
+                        input.required = isOpen;
+                    });
+                });
+            });
+
+            // تطبيق الحالة الافتراضية عند تحميل الصفحة
+            document.querySelectorAll('tr').forEach(function (tr) {
+                const isOpenRadio = tr.querySelector('.is-open-radio[value="true"]');
+                const isOpen = isOpenRadio && isOpenRadio.checked;
+
+                tr.querySelectorAll('.opening-time, .closing-time').forEach(function (input) {
+                    input.disabled = !isOpen;
+                    input.required = isOpen;
+                });
+            });
+        });
+
+
+        document.getElementById("fileInput").addEventListener("change", function(event) {
+            const preview = document.getElementById("previewImage");
+            const deleteBtn = document.getElementById("deleteImage");
+            const file = event.target.files[0];
+
+            if (!file) {
+                preview.src = "";
+                preview.classList.add("d-none");
+                deleteBtn.style.display = "none";
+                return;
+            }
+
+            if (file.type.startsWith("image/")) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove("d-none");
+                    deleteBtn.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("الرجاء اختيار صورة فقط.");
+            }
+        });
+
+        document.getElementById("deleteImage").addEventListener("click", function() {
+            document.getElementById("fileInput").value = "";
+            const preview = document.getElementById("previewImage");
+            preview.src = "";
+            preview.classList.add("d-none");
+            this.style.display = "none";
+        });
+       
+                
+        
+             
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+    }
+}

@@ -1,0 +1,95 @@
+﻿@using UsersApp.Services.Account
+@using UsersApp.ViewModels
+@model EditProfileViewModel
+@inject IAccountService account;
+
+@{
+    var Default = account.GetDefaultProfilePictureUrl(Model.Gender);
+    var profilePictureUrl = !string.IsNullOrEmpty(Model?.ProfilePictureUrl)
+        ? Model.ProfilePictureUrl
+        : Default;
+}
+
+<div class="container mt-5">
+    <form asp-action="EditProfile" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow">
+        <h2 class="text-center mb-4">Edit Profile</h2>
+
+        <div class="form-group text-center">
+            <label for="ProfilePicture">Profile Picture</label>
+            <div class="d-flex align-items-center flex-column">
+                <!-- زر لاختيار صورة -->
+                <input type="file" id="ProfilePicture" name="ProfilePicture" style="display: none;" accept="image/*" onchange="previewImage(event)" />
+
+                <!-- صورة المعاينة -->
+                <a href="javascript:void(0);" onclick="document.getElementById('ProfilePicture').click();">
+                    <img src="@profilePictureUrl" alt="Profile Picture" id="profilePicturePreview" class="rounded-circle" width="120" height="120" style="cursor: pointer;" />
+                </a>
+                <small class="text-muted">Click on the image to upload a new profile picture</small>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="UserName">User Name</label>
+            <input type="text" class="form-control" id="UserName" name="UserName" value="@Model.UserName" required />
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="Email">Email</label>
+            <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" required />
+        </div>
+
+        <div class="form-group mt-3  ">
+            <label asp-for="Gender">الجنس</label>
+            <div class="d-flex">
+                <select style="width:120px" class="form-control " id="Gender" name="Gender" asp-for="Gender" asp-items="@(new SelectList(new[] { "Male", "Female", "Other" }))">
+                </select>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-success rounded-pill me-2">Save Changes</button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary rounded-pill">Cancel</a>
+        </div>
+    </form>
+
+  
+
+</div>
+
+@section Scripts {
+
+    <script>
+        // تحديث صورة المعاينة بناءً على نوع الجنس
+        document.getElementById('Gender').addEventListener('change', function () {
+            const gender = this.value;
+            const preview = document.getElementById('profilePicturePreview');
+            const currentSrc = preview.src;
+
+            // تحقق إذا لم يتم تحميل صورة شخصية
+            if (!currentSrc.includes("profilePictures")) {
+                const defaultImages = {
+                    "Male": "/images/defaults/default_male.png",
+                    "Female": "/images/defaults/default_female.png",
+                    "Other": "/images/defaults/default_unknown.png"
+                };
+                preview.src = defaultImages[gender] || defaultImages["Other"];
+            }
+        });
+
+        // دالة لتغيير صورة المعاينة عند اختيار صورة جديدة
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profilePicturePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+}

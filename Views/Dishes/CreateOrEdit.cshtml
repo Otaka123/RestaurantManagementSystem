@@ -1,0 +1,94 @@
+﻿@model UsersApp.ViewModels.Restaurant.Dish.CreateDishViewModel
+
+@{
+    ViewData["Title"] = Model.Id != Guid.Empty ? "Edit Dish" : "Create Dish";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+}
+
+
+<div class="account">
+
+    <!-- عرض رسائل TempData -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    <div class="container mt-4 form-section ">
+        <h2>@(Model.Id == Guid.Empty ? "Create New Dish" : "Update Dish")</h2>
+
+        <form asp-action="CreateOrEdit" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            @* قيمة مخفية لمعرفة معرف الطبق *@
+            <input type="hidden" asp-for="Id" />
+            @* قيمة مخفية للمطعم؛ تأكد من تمريرها من الـ view أو تعيينها في الـ controller *@
+            @if (@ViewData["Restaurantid"]!=null)
+            {
+                <input type="hidden" asp-for="RestaurantId" value="@ViewData["Restaurantid"]" />
+
+            }
+            @* <input type="hidden" asp-for="RestaurantId"  /> *@
+
+            
+
+            <div class="form-group form-input mt-3 mb-4">
+             <input asp-for="Name" class="form-control" />
+                <label asp-for="Name" class="form-label"></label>
+
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+            <div class="form-group  form-input mb-4">
+                <textarea asp-for="Description" class="form-text" placeholder="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+            <div class="form-group  form-input mb-5">
+        <input asp-for="Price" class="form-control" />
+                <label class="form-label" asp-for="Price" placeholder=" "></label>
+
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+
+                <div class="mb-3">
+                <label asp-for="picture" class="form-label" placeholder=" ">Upload Picture</label>
+                <input type="file" asp-for="picture" class="form-control-file" class="form-control" />
+                <span asp-validation-for="picture" class="text-danger"></span>
+
+            </div>
+
+
+    
+
+    <div class="form-group">
+                <label asp-for="Categoryid" class="form-label" placeholder=" ">Category : </label>
+                <select asp-for="Categoryid" class="form-select" asp-items="Model.Dishescategories">
+
+            <option value="">Select Category</option>
+        </select>
+        <span asp-validation-for="Categoryid" class="text-danger"></span>
+           
+    </div>
+
+            <button type="submit" class="btn btn-light ">Save</button>
+    <a asp-action="Index" class="btn btn-secondary m-0">Cancel</a>
+</form>
+</div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

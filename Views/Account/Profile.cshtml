@@ -1,0 +1,12 @@
+﻿@using UsersApp.ViewModels
+@model ProfilePictureViewModel
+
+<h2>تحديث صورة الملف الشخصي</h2>
+
+<form asp-action="UpdateProfilePicture" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="ProfilePicture">اختر صورة</label>
+        <input type="file" name="ProfilePicture" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">تحديث</button>
+</form>

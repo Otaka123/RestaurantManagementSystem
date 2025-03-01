@@ -1,0 +1,231 @@
+﻿@using Microsoft.AspNetCore.Html
+@using System.Text
+@using UsersApp.ViewModels.restaurant.Restaurant.Dashboard
+@model RestaurantStatisticsViewModel
+@{
+    ViewData["Title"] = "إحصائيات المطعم";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container">
+    <h2>إحصائيات المطاعم</h2>
+    <div class="form-group">
+        <label>اختر المطعم</label>
+        <select id="restaurantSelect" class="form-control">
+            <option value="">-- اختر مطعم --</option>
+            @if (ViewBag.Restaurants != null)
+            {
+                @foreach (var restaurant in ViewBag.Restaurants)
+                {
+                    <option value="@restaurant.Value"
+                            selected="@(restaurant.Value == ViewBag.SelectedRestaurantId.ToString() ? "selected" : null)">
+                        @restaurant.Text
+                    </option>
+                }
+            }
+            else
+            {
+                <option value="">-- لايوجد مطعام لعرضها --</option>
+
+            }
+        </select>
+    </div>
+</div>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@Model.RestaurantName - الإحصائيات</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>@Model.TotalDishes</h3>
+                        <p>الأطباق المتاحة</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>@Model.TotalOrders</h3>
+                        <p>إجمالي الطلبات</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@Model.TotalReviews</h3>
+                        <p>التقييمات</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>@Model.AverageRating</h3>
+                        <p>متوسط التقييم</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Recent Orders -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">أحدث الطلبات</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Dish Name</th>
+
+                                    <th>Unite Price</th>
+                                    <th>Quantity</th>
+
+                                    <th>Total Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model.RecentOrders)
+                                {
+                                    <tr>
+                                        <td> @order.dishname</td>
+                                        <td>@order.UnitPrice</td>
+                                        <td>@order.Quantity</td>
+
+                                        <td>@order.TotalAmount.ToString()</td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+        <!-- Recent Reviews -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">أحدث التقييمات</h3>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var review in Model.RecentReviews)
+                        {
+                                <div class="post">
+                                    <div class="user-block">
+                                        <span class="username">
+                                            <span class="text-muted float-right">@review.CreatedAt.ToString("yyyy-MM-dd")</span>
+                                        @GetRatingStars(review.Rating)
+                                        </span>
+                                    </div>
+                                    <p>@review.Comment</p>
+                                </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @functions {
+    IHtmlContent GetStatusBadgeWithIcon(string status)
+    {
+        var (badgeClass, icon) = status switch
+        {
+            "Completed" => ("bg-success", "fa-check"),
+            "Pending" => ("bg-warning", "fa-clock"),
+            "Cancelled" => ("bg-danger", "fa-times"),
+            _ => ("bg-secondary", "fa-question")
+        };
+
+        return new HtmlString(
+            $"<span class='badge {badgeClass}'>" +
+            $"<i class='fas {icon}'></i> {status}" +
+            "</span>"
+        );
+    }
+
+    IHtmlContent GetRatingStars(int rating)
+    {
+        var sb = new StringBuilder();
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < rating)
+            {
+                sb.Append("<i class='fas fa-star text-warning'></i>");
+            }
+            else
+            {
+                sb.Append("<i class='far fa-star text-warning'></i>");
+            }
+        }
+
+        return new HtmlString(sb.ToString());
+    }
+    }
+
+    <script>
+             $(document).ready(function () {
+        // تحديث القائمة عند التحميل
+        const params = new URLSearchParams(window.location.search);
+        const restaurantId = params.get("restaurantId");
+        if (restaurantId) {
+            $("#restaurantSelect").val(restaurantId);
+        }
+
+        // عند تغيير الاختيار
+        $("#restaurantSelect").change(function () {
+            const id = $(this).val();
+            if (id) {
+                window.location.href = `/Restaurants/GetStatistics?restaurantId=${id}`;
+            }
+        });
+    });
+    </script>
+}

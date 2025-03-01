@@ -1,0 +1,141 @@
+﻿@using UsersApp.ViewModels;
+@model LoginViewModel;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Users> signinManager
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="account">
+    <div class="container p-4">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="row g-0 shadow-lg rounded overflow-hidden">
+            <div class="col-md-6 d-none d-md-block ">
+                <div class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
+                    <h4 class="text-center  responsive-title text-secondary fs-2">Han<span class="text-warning">kol</span></h4>
+
+                    <img src="/images/OrdersImages/burger.png" class="img-fluid rounded-image" alt="Dining Image">
+                </div>
+
+            </div>
+                
+                <div class="col-12 col-md-6 form-section m-auto ">
+                    <h4 class="text-center d-md-none responsive-title text-white fs-2">Han<span class="text-warning">kol</span></h4>
+                <form asp-action="Login" method="post" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3 form-group form-input">
+                <input asp-for="Login" placeholder=" " required />
+                <label asp-for="Login" class="form-label"></label>
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+                    <div class="mb-3 form-group form-input">
+                <input asp-for="Password" placeholder=" " required />
+                <label asp-for="Password" class="form-label"></label>
+
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+           
+            <div class="form-check mb-3">
+                <label class="form-check-label">
+                    <input asp-for="RememberMe" class="form-check-input" />
+                    @Html.DisplayNameFor(a=> a.RememberMe)
+                </label>
+            </div>
+                    <div class="float-end">
+                        <a asp-controller="Account" asp-action="ForgotPassword">
+                            Forgot password?
+                        </a>
+                    </div>
+                    <input type="submit" value="Login" class="btn btn-custom w-100 p-2" />
+            <p class="text-center mt-2 mb-4">
+                Don't have an account? <a asp-controller="Account" asp-action="Register" >Register</a>
+            </p>
+           
+        </form>
+
+        @{
+            var schemes = await signinManager.GetExternalAuthenticationSchemesAsync();
+            var loginProviders = schemes.ToList();
+        }
+        @{
+            if (loginProviders.Count() > 0)
+            {
+
+                <div class="text-center">
+                    <hr />
+                    <p>User another Way to login.</p>
+
+                    <div class="d-flex justify-content-center ">
+                            <form asp-controller="Account" asp-action="ExternalLogin"
+                            asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form" class="form-horizontal">
+
+                                    <div class=" d-flex flex-column g-4">
+                                        @foreach (var provider in loginProviders)
+                                        {
+                                               
+                                                    if (provider.DisplayName == "Google")
+                                                    {
+                                                <button type="submit" class="btn mt-2 btn-custom ps-3 pe-4 pt-0 pb-0 submit " name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+
+                                                            <svg width="24px" height="24px" viewBox="-3 0 400 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4" /><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853" /><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05" /><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335" /></svg>
+                                                            <span>Login With @provider.DisplayName</span>
+                                                        </button>
+
+                                                       
+
+                                                    }
+                                                    else if (provider.DisplayName == "Facebook")
+                                                    {
+
+
+                                                <button type="submit" style="background-color:#0866ff;font-size:18px;" class="btn ps-3 pe-4 pt-2 pb-2 " name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                                             <i class="fab fa-facebook" style="color:white"></i>
+                                                    <span class="text-white">Login With @provider.DisplayName</span>
+                                                         </button>
+
+                                                    }
+                                                  
+                                                
+                                        }
+                                      
+                                </div>
+
+                            </form>
+                    </div>
+
+                </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    <p>
+                        There are no external authentication services configured.
+                    </p>
+                </div>
+            }
+            <div class="text-center ">
+                <a asp-controller="Home" asp-action="Index">Back</a>
+            </div>
+        }
+       
+    </div>
+        </div>
+
+</div>
+</div>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+    }
+}

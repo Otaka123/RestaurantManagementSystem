@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+
+<h2>حذف الدور</h2>
+
+<div class="alert alert-warning">
+    هل أنت متأكد من أنك تريد حذف الدور: <strong>@Model.Name</strong>؟
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">نعم، حذف</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">إلغاء</a>
+</form>

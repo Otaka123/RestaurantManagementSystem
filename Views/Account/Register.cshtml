@@ -1,0 +1,174 @@
+﻿@using UsersApp.ViewModels;
+@model RegisterViewModel;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Users> signinManager
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+
+
+<div class="account">
+
+    <div class="container p-5">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="row g-0 shadow-lg rounded overflow-hidden">
+            <div class="col-md-6 d-none d-md-block ">
+                <div class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
+                    <h4 class="text-center  responsive-title text-secondary fs-2">Han<span class="text-warning">kol</span></h4>
+
+                    <img src="/images/OrdersImages/burger.png" class="img-fluid rounded-image" alt="Dining Image">
+                </div>
+              
+            </div>
+            <div class="col-12 col-md-6 form-section">
+                <h4 class="text-center d-md-none responsive-title text-white fs-2">Han<span class="text-warning">kol</span></h4>
+
+                <h3 class="text-center mb-4 responsive-title fs-4">Hungry you are in right place !</h3>
+                <form asp-controller="Account" asp-action="Register" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                    <div class="row mb-3">
+
+                        <div class="row">
+                            <div class="col-6 form-group form-input">
+                                <input asp-for="FirstName" type="text" name="FirstName" placeholder=" " required />
+                                <label asp-for="FirstName" class="form-label ms-3"></label>
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                            </div>
+                            <div class="col-6 form-group form-input">
+                                <input asp-for="LastName" type="text" name="LastName" placeholder=" " required />
+                                <label asp-for="LastName" class="form-label ms-3"></label>
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-input">
+                        <input asp-for="Phone" type="" name="Phone" placeholder=" " required />
+                        <label asp-for="Phone" class="form-label"></label>
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group form-input">
+                        <input asp-for="Email" type="email" name="email" placeholder=" " required />
+                        <label asp-for="Email" class="form-label"></label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group form-input">
+                        <input asp-for="UserName" type=" text" name="username"  placeholder=" " required />
+                        <label asp-for="UserName" class="form-label"></label>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group form-input">
+                        <input asp-for="Password" type="password" name="password" placeholder=" " required />
+                        <label asp-for="Password" class="form-label"></label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group form-input">
+                        <input asp-for="ConfirmPassword" type="password" name="ConfirmPassword" placeholder=" " required />
+                        <label asp-for="ConfirmPassword" class="form-label"></label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                    </div>
+                    <div class="container mb-3">
+                        <h6 class="responsive-title fs-6 text-center mb-3 ">You want to use our service as:</h6>
+
+                        <div class="d-flex gap-2 justify-content-center">
+                            <!-- زر Own Restaurant -->
+                            <label class="custom-radio">
+                                <input type="radio" asp-for="UserType" value="Owner" id="OwnerRadio" hidden>
+                                <div id="Owner" class="radio-btn rounded-pill ps-2 pe-2 pt-2 pb-2">
+                                    <span class="text-nowrap">Own Restaurant</span>
+                                </div>
+                            </label>
+
+                            <label class="custom-radio">
+                                <input type="radio" asp-for="UserType" value="Customer" id="CustomerRadio" hidden>
+                                <div id="Customer" class="radio-btn rounded-pill ps-2 pe-2 pt-2 pb-2">
+                                    <span class="ps-4 pe-4">Customer</span>
+                                </div>
+                            </label>
+
+                        </div>
+
+                        <!-- عرض رسالة الخطأ -->
+                        <span class="text-danger d-block mt-2" asp-validation-for="UserType"></span>
+
+                    </div>
+
+
+                    <input type="submit" value="Register" class="btn btn btn-custom  w-100 p-2" />
+                    <p class="text-center mt-2">
+                        Already have an account? <a asp-controller="Account" asp-action="Login" class="">Login</a>
+                    </p>
+                    <div class="text-center">
+                        <a asp-controller="Home" asp-action="Index" class="mt-3">Back</a>
+                    </div>
+               </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+                     document.addEventListener("DOMContentLoaded", function () {
+            const radioButtons = document.querySelectorAll("input[name='UserType']");
+
+            function selectOption(option) {
+                // إزالة الفئة النشطة من جميع الأزرار
+                document.querySelectorAll(".radio-btn").forEach(btn => btn.classList.remove("active"));
+
+                // إضافة الفئة النشطة إلى الزر المحدد
+                const selectedBtn = document.getElementById(option);
+                if (selectedBtn) {
+                    selectedBtn.classList.add("active");
+                }
+
+                // تحديد زر الراديو المناسب
+                const selectedRadio = document.getElementById(option + "Radio");
+                if (selectedRadio) {
+                    selectedRadio.checked = true;
+                }
+            }
+
+            // عند الضغط على أي خيار، نقوم بتحديده
+            radioButtons.forEach(radio => {
+                radio.addEventListener("change", function () {
+                    selectOption(this.value);
+                });
+            });
+
+            // تعيين الخيار الافتراضي عند تحميل الصفحة
+            // const checkedRadio = document.querySelector("input[name='UserType']:checked");
+            // if (checkedRadio) {
+            //     selectOption(checkedRadio.value);
+            // }
+        });
+           document.addEventListener("DOMContentLoaded", function () {
+            const customerRadio = document.getElementById("CustomerRadio");
+            const userTypeRadioButtons = document.querySelectorAll("input[name='UserType']:checked");
+
+            // إذا لم يكن هناك خيار محدد مسبقًا، نجعل "Customer" هو الافتراضي
+            if (userTypeRadioButtons.length === 0 && customerRadio) {
+                customerRadio.checked = true;
+                document.getElementById("Customer").classList.add("active"); // تفعيل النمط المرئي
+            }
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+    }
+}

@@ -1,0 +1,167 @@
+﻿@using UsersApp.ViewModels.restaurant.Restaurant.Dashboard
+
+@model RestaurantStatisticsViewModel
+
+@{
+    ViewData["Title"] = "Restaurant Statistics";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <!-- زر العودة -->
+    <a href="@Url.Action("Details", "Restaurants", new { id = ViewContext.RouteData.Values["restaurantId"] })"
+       class="btn btn-outline-secondary mb-4">
+        <i class="fas fa-arrow-left"></i> Back to Restaurant
+    </a>
+
+    <!-- بطاقة الإحصائيات -->
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">General Statistics</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- عدد الأطباق -->
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card text-center p-3 border rounded">
+                        <div class="stat-value text-success">@Model.TotalDishes</div>
+                        <div class="stat-label">Total Dishes</div>
+                    </div>
+                </div>
+
+                <!-- عدد الطلبات -->
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card text-center p-3 border rounded">
+                        <div class="stat-value text-info">@Model.TotalOrders</div>
+                        <div class="stat-label">Total Orders</div>
+                    </div>
+                </div>
+
+                <!-- عدد المراجعات -->
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card text-center p-3 border rounded">
+                        <div class="stat-value text-warning">@Model.TotalReviews</div>
+                        <div class="stat-label">Total Reviews</div>
+                    </div>
+                </div>
+
+                <!-- متوسط التقييم -->
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card text-center p-3 border rounded">
+                        <div class="stat-value text-danger">@Model.AverageRating.ToString("0.0")</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الطلبات الحديثة -->
+    <div class="card shadow mt-4">
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Recent Orders (Last 10)</h4>
+        </div>
+        <div class="card-body">
+            @if (Model.RecentOrders.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Dish Name</th>
+
+                                <th>Unite Price</th>
+                                <th>Quantity</th>
+
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.RecentOrders)
+                            {
+                                <tr>
+                                    <td> @order.dishname</td>
+                                    <td>@order.UnitPrice</td>
+                                    <td>@order.Quantity</td>
+
+                                    <td>@order.TotalAmount.ToString()</td>
+                                
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">No recent orders found</div>
+            }
+        </div>
+    </div>
+
+    <!-- قسم المراجعات الحديثة -->
+    <div class="card shadow mt-4">
+        <div class="card-header bg-warning text-white">
+            <h4 class="mb-0">Recent Reviews (Last 10)</h4>
+        </div>
+        <div class="card-body">
+            @if (Model.RecentReviews.Any())
+            {
+                <div class="row">
+                    @foreach (var review in Model.RecentReviews)
+                    {
+                        <div class="col-md-6 mb-3">
+                            <div class="card review-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        @* <h5 class="card-title"></h5> *@
+                                        <div class="rating">
+                                            @for (int i = 0; i < 5; i++)
+                                            {
+                                                <i class="fas fa-star @(i < review.Rating ? "text-warning" : "text-muted")"></i>
+                                            }
+                                        </div>
+                                    </div>
+                                    <p class="card-text">@review.Comment</p>
+                                    <small class="text-muted">@review.CreatedAt.ToString("g")</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">No recent reviews found</div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .stat-card {
+            transition: transform 0.2s;
+        }
+
+            .stat-card:hover {
+                transform: translateY(-3px);
+            }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .review-card {
+            height: 100%;
+        }
+    </style>
+}

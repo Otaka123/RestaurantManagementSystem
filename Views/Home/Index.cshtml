@@ -1,0 +1,412 @@
+﻿@using UsersApp.ViewModels.restaurant.Dish
+@model DishFilter
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="firstsec">
+
+    <div class="container ">
+        <div class="overlay"></div>
+
+        <div class="row d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <!-- يجعل العناصر بجانب بعض -->
+            <div class="burger col-12 col-sm-5   ">
+                <img src="~/images/OrdersImages/burger.png" alt="Burger Image" class="img-fluid ">
+            </div>
+
+            <div class="col-12 col-sm-7  ">
+                <p class="fs-2 title  text-center text-sm-start ">Enjoy Hanakol make<br /><span class="line">your</span> tummy happy</p>
+                <p class="pt-2 text-white-50 ">Enjoy the rich flavors of delicious, fresh, and organic food, crafted to satisfy your cravings with every bite! </p>
+                <div class="row d-flex justify-content-center  justify-content-sm-start pt-4 ">
+                    <div class="col-3  d-flex flex-column align-items-center align-items-sm-start">
+                        <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 512 512" xml:space="preserve" fill="#000000" stroke="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
+                                                                                                                                                                                                                                                                                                                                                                                                               .st0 {
+                                                                                                                                                                                                                                                                                                                                                                                                                   fill: #ffc400;
+                                                                                                                                                                                                                                                                                                                                                                                                               }
+</style> <g> <path class="st0" d="M207.103,23.875v109.219c0,7-5.656,12.641-12.625,12.641h-3.375c-6.969,0-12.641-5.641-12.641-12.641V23.375 c0-18-12.109-23.375-23.719-23.375s-23.719,5.375-23.719,23.375v109.719c0,7-5.672,12.641-12.641,12.641h-3.375 c-6.969,0-12.625-5.641-12.625-12.641V23.875c0-32.219-45.938-31.125-45.938,0.359c0,37.703,0,104.297,0,104.297 c-0.219,57.906,13.625,72.953,36.469,91c18.422,14.531,34.156,22.859,34.156,58.953v232.188h55.344V278.484 c0-36.094,15.734-44.422,34.156-58.953c22.859-18.047,36.688-33.094,36.469-91c0,0,0-66.594,0-104.297 C253.04-7.25,207.103-8.344,207.103,23.875z"></path> <path class="st0" d="M385.228,34.75c-11.75,32.953-45.578,110.156-47.719,178.344c-3.313,105.844,61.547,90.188,62.703,159.531 v138.688h55.078l0.266,0.688c0,0,0-0.281,0-0.688c0-9.266,0-119.625,0-232.203c0-111.359,0-224.797,0-244.359 C455.556-5.438,403.524-16.531,385.228,34.75z"></path> </g> </g></svg>
+
+                        <span class=" pt-3 text-start">Delicious</span>
+                    </div>
+                    <div class="col-3 d-flex flex-column align-items-center align-items-sm-start">
+                        <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 512 512" xml:space="preserve" fill=" #ffc400" stroke=" #ffc400"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
+                                                                                                                                                                                                                                                                                                                                                                                                                 .st0 {
+                                                                                                                                                                                                                                                                                                                                                                                                                     fill: #ffc400;
+                                                                                                                                                                                                                                                                                                                                                                                                                 }
+</style> <g> <path class="st0" d="M391.703,195.531l-0.203-0.344l-0.266-0.375L256,0L120.516,195.156l-0.234,0.375 c-27.172,42.719-45.609,92.109-45.703,141.75c-0.016,21.328,3.5,42.688,11.438,63.063c7.906,20.375,20.281,39.688,37.313,56.719 h0.016C159.906,493.641,208.063,512.031,256,512c47.938,0.031,96.078-18.359,132.656-54.938l-15.859,15.859l15.859-15.859 c17.047-17.031,29.422-36.344,37.328-56.703c7.938-20.391,11.438-41.75,11.438-63.063 C437.328,287.641,418.891,238.25,391.703,195.531z M384.141,384.078c-5.719,14.672-14.453,28.438-27.219,41.234l15.875-15.875 l-15.875,15.875C329,453.219,292.609,467.078,256,467.109c-36.609-0.031-73-13.891-100.922-41.797l0,0 c-12.781-12.797-21.5-26.563-27.234-41.25c-5.703-14.672-8.375-30.344-8.375-46.781c-0.109-38.078,14.859-80.328,38.531-117.375 l98-141.188l98.031,141.219c23.641,37.047,38.594,79.281,38.5,117.359C392.531,353.734,389.859,369.406,384.141,384.078z"></path> <path class="st0" d="M205.328,237.781c-23.422,26.031-60.719,94.547-37.297,142.25c26.156,53.281,61.75,21.609,45.109-12.125 C181.047,302.844,205.328,237.781,205.328,237.781z"></path> </g> </g></svg>
+                        <span class=" pt-3 text-start">Fresh</span>
+                    </div>
+
+                    <div class="col-4  d-flex flex-column align-items-center align-items-sm-start">
+                        <svg fill="#ffc400" width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>leaf</title> <path d="M30.039 2.719c-0.143-0.544-0.631-0.939-1.211-0.939-0.395 0-0.748 0.184-0.977 0.47l-0.002 0.002c-1.639 1.931-3.786 3.384-6.235 4.158l-0.096 0.026c-1.66 0.54-3.592 0.925-5.588 1.079l-0.086 0.005c-2.296 0.094-4.448 0.609-6.414 1.468l0.114-0.045c-3.466 1.876-5.78 5.485-5.78 9.633 0 0.064 0.001 0.127 0.002 0.19l-0-0.010c0.010 0.318 0.031 0.631 0.068 0.945 0.144 1.149 0.443 2.193 0.877 3.163l-0.028-0.070c-1.472 1.947-2.758 4.166-3.758 6.536l-0.076 0.204c-0.064 0.145-0.101 0.314-0.101 0.492 0 0.512 0.309 0.953 0.75 1.146l0.008 0.003c0.144 0.064 0.311 0.102 0.487 0.102 0.001 0 0.003 0 0.004 0h-0c0 0 0.001 0 0.001 0 0.512 0 0.953-0.308 1.146-0.75l0.003-0.008c0.863-2.053 1.833-3.813 2.96-5.455l-0.066 0.102c1.149 1.549 2.642 2.78 4.37 3.593l0.070 0.030c1.482 0.678 3.216 1.072 5.041 1.072 0.026 0 0.052-0 0.077-0l-0.004 0c1.957-0.008 3.82-0.406 5.517-1.119l-0.095 0.035c5.424-2.452 9.281-7.517 9.983-13.546l0.008-0.079c0.151-1.153 0.237-2.486 0.237-3.839 0-3.061-0.441-6.020-1.264-8.815l0.056 0.22zM28.537 14.781c-0.578 5.22-3.848 9.56-8.373 11.642l-0.090 0.037c-1.28 0.561-2.772 0.888-4.34 0.888-1.522 0-2.972-0.308-4.292-0.864l0.073 0.027c-1.604-0.758-2.91-1.921-3.822-3.358l-0.022-0.037c3.354-3.495 8.014-5.715 13.193-5.872l0.029-0.001c0.636-0.064 1.129-0.596 1.129-1.244 0-0.69-0.56-1.25-1.25-1.25-0.043 0-0.085 0.002-0.126 0.006l0.005-0c-5.472 0.226-10.391 2.428-14.097 5.906l0.012-0.011c-0.102-0.347-0.188-0.766-0.242-1.196l-0.004-0.042c-0.027-0.24-0.045-0.482-0.051-0.723-0.001-0.048-0.002-0.105-0.002-0.162 0-3.16 1.757-5.909 4.348-7.325l0.044-0.022c1.6-0.679 3.456-1.104 5.402-1.174l0.027-0.001c2.288-0.177 4.409-0.604 6.429-1.258l-0.195 0.055c2.238-0.74 4.171-1.848 5.83-3.267l-0.023 0.020c0.404 1.735 0.635 3.727 0.635 5.773 0 1.216-0.082 2.414-0.24 3.587l0.015-0.137z"></path> </g></svg>
+                        <span class=" pt-3 text-start">Organic</span>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center justify-content-sm-start">
+                    <div class="col-6 text-center text-sm-start  p-2 mt-3 ">
+                        <a class="text-dark   btn btn-warning" asp-controller="Customer" asp-action="Index">GetStarted</a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="Secondsec">
+    <div class="overlay"></div>
+
+    <div class="container">
+
+        <div class="row d-flex justify-content-center ">
+
+            <div class="col-10  mt-2 col-md-4">
+                <a class="btn btn-warning d-flex flex-column flex-md-row align-items-center justify-content-between h-100 p-3" asp-action="Index" asp-route-filter.CategoryId="1" asp-controller="Customer">
+                    <img src="/images/OrdersImages/smallburger.png" alt="Burger" class="img-fluid w-50" style="max-height: 150px; object-fit: contain;">
+                    <div class="text-content w-50 text-md-start text-center">
+                        <h4 class="text-capitalize responsive-title mt-2">Food</h4>
+                        <p class="responsive">Make your Tummy happy</p>
+                        <h6 class="text-dark mb-0 pb-2 responsive">Buy Online</h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-10  mt-2 col-md-4">
+                <a class="btn btn-danger d-flex flex-column flex-md-row align-items-center justify-content-between h-100 p-3" asp-action="Index" asp-route-filter.CategoryId="2" asp-controller="Customer">
+                    <img src="/images/OrdersImages/tea2.png" alt="Tea" class="img-fluid w-50" style="max-height: 150px; object-fit: contain;">
+                    <div class="text-content w-50 text-md-start text-center">
+                        <h4 class="text-capitalize responsive-title mt-2">Drinks</h4>
+                        <p class="responsive ">Make your Tummy happy</p>
+                        <h6 class="text-warning mb-0 pb-2 responsive">Buy Online</h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-10 mt-2 col-md-4">
+                <a class="btn btn-success d-flex flex-column flex-md-row align-items-center justify-content-between h-100 p-3">
+                    <img src="/images/OrdersImages/Chips.png" alt="Chips" class="img-fluid w-50" style="max-height: 150px; object-fit: contain;">
+                    <div class="text-content w-50 text-md-start text-center ">
+                        <h4 class="text-capitalize responsive-title  mt-2">Snacks</h4>
+                        <p class="responsive">Make your Tummy happy</p>
+                        <h6 class="text-warning mb-0 pb-2 responsive">Buy Online</h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="container mt-4 ">
+                <div class="offer-cards row d-flex justify-content-center align-items-center">
+
+                    <div class="mt-2 col-10  col-md-6">
+                        <div class="btn bg-secondary bg-opacity-25 d-flex flex-column flex-md-row align-items-center justify-content-between h-100 p-3">
+                            <div class="text-content w-50 text-md-start text-center ">
+                                <h6 class="text-warning mb-0 pb-2 responsive">payday promo</h6>
+
+                                <h4 class="text-capitalize responsive-title  mt-2">Get a 10% Discount on<br />payDay week</h4>
+                                <p class="responsive">Make your Tummy happy</p>
+                                <h6 class="text-warning mb-0 pb-2 responsive">Buy Online</h6>
+                            </div>
+                            <div class="mt-4 d-flex justify-content-center justify-content-sm-end align-items-end">
+                                <img src="/images/OrdersImages/Chips.png" alt="Chips" class="img-fluid w-50" style="max-height: 150px; object-fit: contain;">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="mt-2  col-10  col-md-6">
+                        <div class=" btn bg-secondary bg-opacity-25 d-flex flex-column flex-md-row align-items-center justify-content-between h-100 p-3">
+                            <div class="text-content w-50 text-md-start text-center ">
+                                <h6 class="text-warning mb-0 pb-2 responsive">payday promo</h6>
+
+                                <h4 class="text-capitalize responsive-title  mt-2">buy 1 coke get more<br />free coke</h4>
+                                <p class="responsive">Make your Tummy happy</p>
+                                <h6 class="text-warning mb-0 pb-2 responsive">Buy Online</h6>
+                            </div>
+                            <div class="mt-4 d-flex  justify-content-center justify-content-sm-end align-items-end">
+                                <img src="/images/OrdersImages/cola.png" alt="Chips" class="img-fluid w-50" style="max-height: 150px; object-fit: contain;">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+<div class="fourthsec">
+    <div class="overlay"></div>
+    <div class="overlaybackground"></div>
+
+    <div class="container">
+            <a class="text-decoration-none d-flex justify-content-center align-items-center position-relative w-100 mb-5" asp-controller="Customer" asp-action="Index">
+                <div class="rounded-circle bg-warning bg-opacity-25 position-absolute  d-flex justify-content-center align-items-center " style="width:80px; height:80px;">
+                    <svg height="64px" width="64px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle style="fill:#EBBA16;" cx="29" cy="29" r="29"></circle> <g> <polygon style="fill:#FFFFFF;" points="44,29 22,44 22,29.273 22,14 "></polygon> <path style="fill:#FFFFFF;" d="M22,45c-0.16,0-0.321-0.038-0.467-0.116C21.205,44.711,21,44.371,21,44V14 c0-0.371,0.205-0.711,0.533-0.884c0.328-0.174,0.724-0.15,1.031,0.058l22,15C44.836,28.36,45,28.669,45,29s-0.164,0.64-0.437,0.826 l-22,15C22.394,44.941,22.197,45,22,45z M23,15.893v26.215L42.225,29L23,15.893z"></path> </g> </g></svg>
+                </div>
+            </a>
+
+
+
+
+        <div class="text-center mt-5">
+            <p class="responsive-title  fs-4 mt-5"> we serve <span class="line"> you </span>  the best</p>
+            <p class="text-white-50">loerm
+                loermeloemrloerm
+            </p>
+        </div>
+</div>
+
+</div>
+
+                <div class="fiveec container">
+
+    <div class="row d-flex g-5 flex-column align-items-center justify-content-start p-4 flex-sm-row justify-content-sm-start align-items-sm-start">
+        <!-- يجعل العناصر بجانب بعض -->
+        <div class=" col-12 col-sm-5 p-2">
+            <img src="~/images/OrdersImages/order.jpg" alt="Burger Image" class="img-fluid rounded-3   ">
+        </div>
+
+        <div class="col-12 col-sm-7  pt-2 ">
+            <div class="pb-5">
+                <p class="fs-2 title  text-center text-sm-start ">Don't worry! you can order<br />  <span class="line">your</span> food just by phone</p>
+                <p class="pt-2 text-white-50 ">Enjoy the rich flavors of delicious, fresh, and organic food, crafted to satisfy your cravings with every bite! </p>
+
+            </div>
+         
+            <div class="row d-flex ">
+                <div class="flex-sm-shrink-1 mt-5  col-md-10 ">
+                    <div class="btn bg-secondary bg-opacity-25 d-flex flex-column flex-md-row align-items-center   h-100 p-3">
+                        <div class=" d-flex justify-content-center  align-items-center bg-warning btn p-2 ">
+                            
+                        
+                            <svg height="48px" width="48px" version="1.1" id="_x32_"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
+                                                                                                                                                                                                                                                                                                                                          .st333 {
+                                                                                                                                                                                                                                                                                                                                                                                                  fill: #ffffff;
+                                                                                                                                                                                                                                                                                                                                                                                              }
+</style> <g> <path class="st333" d="M144.22,323.83c-28.184,0-51.02,22.836-51.02,51.02s22.836,51.02,51.02,51.02s51.02-22.836,51.02-51.02 S172.404,323.83,144.22,323.83z M144.22,397.808c-12.683,0-22.958-10.275-22.958-22.958s10.275-22.958,22.958-22.958 s22.958,10.275,22.958,22.958S156.902,397.808,144.22,397.808z"></path> <path class="st333" d="M397.084,323.83c-28.184,0-51.021,22.836-51.021,51.02s22.837,51.02,51.021,51.02 c28.184,0,51.02-22.836,51.02-51.02S425.267,323.83,397.084,323.83z M397.084,397.808c-12.683,0-22.958-10.275-22.958-22.958 s10.275-22.958,22.958-22.958c12.682,0,22.958,10.275,22.958,22.958S409.766,397.808,397.084,397.808z"></path> <path class="st333" d="M509.278,107.211c-2.633-6.216-6.981-11.467-12.497-15.179c-2.746-1.86-5.789-3.342-9.043-4.357 c-3.244-1.006-6.707-1.546-10.258-1.546H166.42c-4.397,0-8.737,0.693-12.844,2.126c-3.076,1.064-6.015,2.545-8.737,4.413 c-4.082,2.778-7.61,6.41-10.412,10.678c-2.698,4.09-4.711,8.729-6.056,13.786L97.87,200.933l-0.137,0.572 c-0.386,1.514-0.878,2.81-1.458,3.978c-0.886,1.724-1.972,3.197-3.326,4.582c-1.353,1.377-2.987,2.666-4.888,3.881l-72.118,46.076 C6.014,266.36,0,277.335,0,289.108v49.998c0,4.735,0.966,9.308,2.714,13.448c2.641,6.208,7.006,11.458,12.506,15.179 c2.746,1.86,5.789,3.325,9.042,4.34c3.245,1.014,19.511,2.754,23.071,2.754h28.86c0.016-37.565,30.462-68.003,68.027-68.003 c37.564,0,68.011,30.438,68.028,68.003h116.809c0.017-37.565,30.462-68.003,68.028-68.003c37.565,0,68.011,30.438,68.027,68.003 h7.408c0-0.274-0.007-0.548-0.016-0.822h0.016l-0.016-0.008c0-0.121-0.008-0.242-0.008-0.363h4.984 c4.735,0,9.309-0.974,13.44-2.722c6.217-2.641,11.458-6.989,15.179-12.498c1.868-2.754,3.342-5.789,4.348-9.043 c1.015-3.245,1.554-6.716,1.554-10.267V120.642C512,115.908,511.026,111.342,509.278,107.211z M166.887,248.064 c0-4.268,3.462-7.73,7.73-7.73h34.014c4.268,0,7.73,3.462,7.73,7.73c0,4.268-3.462,7.73-7.73,7.73h-34.014 C170.35,255.795,166.887,252.332,166.887,248.064z M132.584,211.128c-2.191-3.133-2.714-7.126-1.402-10.71l27.692-75.862 l0.282-1.071c0.669-2.528,1.61-4.726,2.803-6.522c1.063-1.618,2.295-2.899,3.672-3.841c0.966-0.669,1.916-1.144,2.898-1.482 c1.49-0.524,3.068-0.774,4.768-0.774h32.419c6.45,0,11.684,5.234,11.684,11.684v81.878c0,6.45-5.235,11.684-11.684,11.684h-63.558 C138.341,216.112,134.766,214.252,132.584,211.128z M260.344,204.428V122.55c0-6.45,5.234-11.684,11.684-11.684h110.625 c6.45,0,11.684,5.234,11.684,11.684v81.878c0,6.45-5.234,11.684-11.684,11.684H272.029 C265.579,216.112,260.344,210.878,260.344,204.428z"></path> </g> </g></svg>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class=" w-100 ps-2 text-center text-sm-start ">
+
+                            <h4 class="text-capitalize responsive-title fs-5 mt-2">free delivery</h4>
+                            <p class="responsive">Make your Tummy happy</p>
+                        </div>
+
+
+                    </div>
+              </div>
+
+            </div>
+            <div class="row d-flex ">
+                <div class="flex-sm-shrink-1 mt-5 justify-content-center col-md-10 ">
+                    <div class="btn bg-secondary bg-opacity-25 d-flex flex-column flex-md-row align-items-center justify-content-between h-100 p-3">
+                        <div class=" d-flex justify-content-center  align-items-center bg-warning btn p-2 ">
+                            <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_443_3628)"> <rect x="2" y="6" width="20" height="12" stroke="#ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></rect> <path d="M22 10C21.4747 10 20.9546 9.89654 20.4693 9.69552C19.984 9.4945 19.543 9.19986 19.1716 8.82843C18.8001 8.45699 18.5055 8.01604 18.3045 7.53073C18.1035 7.04543 18 6.52529 18 6L22 6L22 10Z" stroke="#ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M18 18C18 16.9391 18.4214 15.9217 19.1716 15.1716C19.9217 14.4214 20.9391 14 22 14L22 18L18 18Z" stroke="#ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M2 14C3.06087 14 4.07828 14.4214 4.82843 15.1716C5.57857 15.9217 6 16.9391 6 18L2 18L2 14Z" stroke="#ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 6C6 7.06087 5.57857 8.07828 4.82843 8.82843C4.07828 9.57857 3.06087 10 2 10L2 6H6Z" stroke="#ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14.0741 9.5H11.3333C10.597 9.5 10 10.0596 10 10.75C10 11.4404 10.597 12 11.3333 12H13.1111C13.8475 12 14.4444 12.5596 14.4444 13.25C14.4444 13.9404 13.8475 14.5 13.1111 14.5H10" stroke="#ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 9.51733V8.5" stroke="#ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 15.5173V14.5" stroke="#ffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> <defs> <clipPath id="clip0_443_3628"> <rect width="24" height="24" fill="white"></rect> </clipPath> </defs> </g></svg>
+                        </div>
+                        <div class=" w-100 ps-2 text-center text-sm-start ">
+
+                            <h4 class="text-capitalize responsive-title fs-5 mt-2">special promo</h4>
+                            <p class="responsive">Make your Tummy happy</p>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row d-flex justify-content-center justify-content-sm-start ps-2">
+                <div class="col-6 btn text-center text-sm-start m-auto p-2  ">
+                    <svg width="125px" height="125px" viewBox="0 -47.5 135 135" id="Layer_1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <style>
+                                .st9999 {
+                                    fill: #a6a6a6
+                                }
+
+                                .st1 {
+                                    stroke: #ffffff;
+                                    stroke-width: 0.2px;
+                                    stroke-miterlimit: 10
+                                }
+
+                                .st1, .st2 {
+                                    fill: #fff
+                                }
+
+                                .st3 {
+                                    fill: url(#SVGID_1_)
+                                }
+
+                                .st4 {
+                                    fill: url(#SVGID_2_)
+                                }
+
+                                .st5 {
+                                    fill: url(#SVGID_3_)
+                                }
+
+                                .st6 {
+                                    fill: url(#SVGID_4_)
+                                }
+
+                                .st7, .st8, .st9 {
+                                    opacity: .2;
+                                    enable-background: new
+                                }
+
+                                .st8, .st9 {
+                                    opacity: .12
+                                }
+
+                                .st9 {
+                                    opacity: .25;
+                                    fill: #fff
+                                }</style> <path d="M130 40H5c-2.8 0-5-2.2-5-5V5c0-2.8 2.2-5 5-5h125c2.8 0 5 2.2 5 5v30c0 2.8-2.2 5-5 5z"></path> <path class="st9999" d="M130 .8c2.3 0 4.2 1.9 4.2 4.2v30c0 2.3-1.9 4.2-4.2 4.2H5C2.7 39.2.8 37.3.8 35V5C.8 2.7 2.7.8 5 .8h125m0-.8H5C2.2 0 0 2.3 0 5v30c0 2.8 2.2 5 5 5h125c2.8 0 5-2.2 5-5V5c0-2.7-2.2-5-5-5z"></path> <path class="st1" d="M47.4 10.2c0 .8-.2 1.5-.7 2-.6.6-1.3.9-2.2.9-.9 0-1.6-.3-2.2-.9-.6-.6-.9-1.3-.9-2.2 0-.9.3-1.6.9-2.2.6-.6 1.3-.9 2.2-.9.4 0 .8.1 1.2.3.4.2.7.4.9.7l-.5.5c-.4-.5-.9-.7-1.6-.7-.6 0-1.2.2-1.6.7-.5.4-.7 1-.7 1.7s.2 1.3.7 1.7c.5.4 1 .7 1.6.7.7 0 1.2-.2 1.7-.7.3-.3.5-.7.5-1.2h-2.2v-.8h2.9v.4zM52 7.7h-2.7v1.9h2.5v.7h-2.5v1.9H52v.8h-3.5V7H52v.7zM55.3 13h-.8V7.7h-1.7V7H57v.7h-1.7V13zM59.9 13V7h.8v6h-.8zM64.1 13h-.8V7.7h-1.7V7h4.1v.7H64V13zM73.6 12.2c-.6.6-1.3.9-2.2.9-.9 0-1.6-.3-2.2-.9-.6-.6-.9-1.3-.9-2.2s.3-1.6.9-2.2c.6-.6 1.3-.9 2.2-.9.9 0 1.6.3 2.2.9.6.6.9 1.3.9 2.2 0 .9-.3 1.6-.9 2.2zm-3.8-.5c.4.4 1 .7 1.6.7.6 0 1.2-.2 1.6-.7.4-.4.7-1 .7-1.7s-.2-1.3-.7-1.7c-.4-.4-1-.7-1.6-.7-.6 0-1.2.2-1.6.7-.4.4-.7 1-.7 1.7s.2 1.3.7 1.7zM75.6 13V7h.9l2.9 4.7V7h.8v6h-.8l-3.1-4.9V13h-.7z"></path> <path class="st2" d="M68.1 21.8c-2.4 0-4.3 1.8-4.3 4.3 0 2.4 1.9 4.3 4.3 4.3s4.3-1.8 4.3-4.3c0-2.6-1.9-4.3-4.3-4.3zm0 6.8c-1.3 0-2.4-1.1-2.4-2.6s1.1-2.6 2.4-2.6c1.3 0 2.4 1 2.4 2.6 0 1.5-1.1 2.6-2.4 2.6zm-9.3-6.8c-2.4 0-4.3 1.8-4.3 4.3 0 2.4 1.9 4.3 4.3 4.3s4.3-1.8 4.3-4.3c0-2.6-1.9-4.3-4.3-4.3zm0 6.8c-1.3 0-2.4-1.1-2.4-2.6s1.1-2.6 2.4-2.6c1.3 0 2.4 1 2.4 2.6 0 1.5-1.1 2.6-2.4 2.6zm-11.1-5.5v1.8H52c-.1 1-.5 1.8-1 2.3-.6.6-1.6 1.3-3.3 1.3-2.7 0-4.7-2.1-4.7-4.8s2.1-4.8 4.7-4.8c1.4 0 2.5.6 3.3 1.3l1.3-1.3c-1.1-1-2.5-1.8-4.5-1.8-3.6 0-6.7 3-6.7 6.6 0 3.6 3.1 6.6 6.7 6.6 2 0 3.4-.6 4.6-1.9 1.2-1.2 1.6-2.9 1.6-4.2 0-.4 0-.8-.1-1.1h-6.2zm45.4 1.4c-.4-1-1.4-2.7-3.6-2.7s-4 1.7-4 4.3c0 2.4 1.8 4.3 4.2 4.3 1.9 0 3.1-1.2 3.5-1.9l-1.4-1c-.5.7-1.1 1.2-2.1 1.2s-1.6-.4-2.1-1.3l5.7-2.4-.2-.5zm-5.8 1.4c0-1.6 1.3-2.5 2.2-2.5.7 0 1.4.4 1.6.9l-3.8 1.6zM82.6 30h1.9V17.5h-1.9V30zm-3-7.3c-.5-.5-1.3-1-2.3-1-2.1 0-4.1 1.9-4.1 4.3s1.9 4.2 4.1 4.2c1 0 1.8-.5 2.2-1h.1v.6c0 1.6-.9 2.5-2.3 2.5-1.1 0-1.9-.8-2.1-1.5l-1.6.7c.5 1.1 1.7 2.5 3.8 2.5 2.2 0 4-1.3 4-4.4V22h-1.8v.7zm-2.2 5.9c-1.3 0-2.4-1.1-2.4-2.6s1.1-2.6 2.4-2.6c1.3 0 2.3 1.1 2.3 2.6s-1 2.6-2.3 2.6zm24.4-11.1h-4.5V30h1.9v-4.7h2.6c2.1 0 4.1-1.5 4.1-3.9s-2-3.9-4.1-3.9zm.1 6h-2.7v-4.3h2.7c1.4 0 2.2 1.2 2.2 2.1-.1 1.1-.9 2.2-2.2 2.2zm11.5-1.8c-1.4 0-2.8.6-3.3 1.9l1.7.7c.4-.7 1-.9 1.7-.9 1 0 1.9.6 2 1.6v.1c-.3-.2-1.1-.5-1.9-.5-1.8 0-3.6 1-3.6 2.8 0 1.7 1.5 2.8 3.1 2.8 1.3 0 1.9-.6 2.4-1.2h.1v1h1.8v-4.8c-.2-2.2-1.9-3.5-4-3.5zm-.2 6.9c-.6 0-1.5-.3-1.5-1.1 0-1 1.1-1.3 2-1.3.8 0 1.2.2 1.7.4-.2 1.2-1.2 2-2.2 2zm10.5-6.6l-2.1 5.4h-.1l-2.2-5.4h-2l3.3 7.6-1.9 4.2h1.9l5.1-11.8h-2zm-16.8 8h1.9V17.5h-1.9V30z"></path> <g> <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="21.8" y1="33.29" x2="5.017" y2="16.508" gradientTransform="matrix(1 0 0 -1 0 42)"> <stop offset="0" stop-color="#00a0ff"></stop> <stop offset=".007" stop-color="#00a1ff"></stop> <stop offset=".26" stop-color="#00beff"></stop> <stop offset=".512" stop-color="#00d2ff"></stop> <stop offset=".76" stop-color="#00dfff"></stop> <stop offset="1" stop-color="#00e3ff"></stop> </linearGradient> <path class="st3" d="M10.4 7.5c-.3.3-.4.8-.4 1.4V31c0 .6.2 1.1.5 1.4l.1.1L23 20.1v-.2L10.4 7.5z"></path> <linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="33.834" y1="21.999" x2="9.637" y2="21.999" gradientTransform="matrix(1 0 0 -1 0 42)"> <stop offset="0" stop-color="#ffe000"></stop> <stop offset=".409" stop-color="#ffbd00"></stop> <stop offset=".775" stop-color="orange"></stop> <stop offset="1" stop-color="#ff9c00"></stop> </linearGradient> <path class="st4" d="M27 24.3l-4.1-4.1V19.9l4.1-4.1.1.1 4.9 2.8c1.4.8 1.4 2.1 0 2.9l-5 2.7z"></path> <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="24.827" y1="19.704" x2="2.069" y2="-3.054" gradientTransform="matrix(1 0 0 -1 0 42)"> <stop offset="0" stop-color="#ff3a44"></stop> <stop offset="1" stop-color="#c31162"></stop> </linearGradient> <path class="st5" d="M27.1 24.2L22.9 20 10.4 32.5c.5.5 1.2.5 2.1.1l14.6-8.4"></path> <linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="7.297" y1="41.824" x2="17.46" y2="31.661" gradientTransform="matrix(1 0 0 -1 0 42)"> <stop offset="0" stop-color="#32a071"></stop> <stop offset=".069" stop-color="#2da771"></stop> <stop offset=".476" stop-color="#15cf74"></stop> <stop offset=".801" stop-color="#06e775"></stop> <stop offset="1" stop-color="#00f076"></stop> </linearGradient> <path class="st6" d="M27.1 15.8L12.5 7.5c-.9-.5-1.6-.4-2.1.1L22.9 20l4.2-4.2z"></path> <path class="st7" d="M27 24.1l-14.5 8.2c-.8.5-1.5.4-2 0l-.1.1.1.1c.5.4 1.2.5 2 0L27 24.1z"></path> <path class="st8" d="M10.4 32.3c-.3-.3-.4-.8-.4-1.4v.1c0 .6.2 1.1.5 1.4v-.1h-.1zM32 21.3l-5 2.8.1.1 4.9-2.8c.7-.4 1-.9 1-1.4 0 .5-.4.9-1 1.3z"></path> <path class="st9" d="M12.5 7.6L32 18.7c.6.4 1 .8 1 1.3 0-.5-.3-1-1-1.4L12.5 7.5c-1.4-.8-2.5-.2-2.5 1.4V9c0-1.5 1.1-2.2 2.5-1.4z"></path> </g>
+                        </g>
+                    </svg>
+                </div>
+               
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="sixsec d-flex justify-content-center align-items-end">
+
+
+    <div class="col-12  bg-warning w-100">
+        <div class="subscribe pt-5 pb-5 text-center ">
+            <div class="container">
+                <div class="row d-flex justify-content-center w-100 ">
+                    <div class="col-md-5 col-lg-3">
+                        <div class="text-capitalize text-nowrap fs-5 mt-2 text-black fw-bold ">get exclusive update : </div>
+                    </div>
+                    <div class="col-md-7 col-lg-6 mb-3">
+                        <input class="w-100 text-light p-2 bg-transparent" type="text" placeholder="Enter Email Address" />
+                    </div>
+                    <div class="col-md-12 col-lg-3 d-sm-flex justify-content-sm-center">
+                        <div class="btn bg-black p-2   text-white  mt-3">
+
+
+                            <div class="text-capitalize text-nowrap fs-6 text-center   "> <p class=" mb-0">  supcribe now</p> </div>
+
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        <div class="footer pt-5 pb-5 text-white-50 text-center text-md-start">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="info mb-5">
+                            <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                                Han<span class="text-warning">Kol</span>
+                            </a>
+                            <p class="mb-5">
+                                Pellentesque in ipsum id orci porta dapibus. Vivamus magna justo, lacinia eget consectetur sed,
+                                convallis at tellus.
+                            </p>
+                            <div class="copyright">
+                                Created By <span class="text-capitalize">Marwan osama</span>
+                                <div>&copy; 2025 - <span>hanakol</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-2">
+                        <div class="links">
+                            <h5 class="text-light">Links</h5>
+                            <ul class="list-unstyled lh-lg">
+                                <li  >Home</li>
+                                <li>Our Services</li>
+                                <li>Portfolio</li>
+                                <li>Testimonials</li>
+                                <li>Support</li>
+                                <li>Terms and Condition</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-2">
+                        <div class="links">
+                            <h5 class="text-light">About Us</h5>
+                            <ul class="list-unstyled lh-lg">
+                                <li> <a asp-controller="Account" asp-action="Login">Sign In </a></li>
+                                <li> <a asp-controller="Account" asp-action="Register">Register</a></li>
+                                <li> <a asp-action="AboutUs">About Us</a></li>
+                                <li> <a asp-action="AboutUs">Blog</a>Blog</li>
+                                <li> <a asp-action="AboutUs">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="contact">
+                            <h5 class="text-light">Contact Us</h5>
+                            <p class="lh-lg mt-3 mb-5">Get in touch with us via mail phone.We are waiting for your call or message</p>
+
+                            <a class="text-capitalize responsive-title fs-2 mt-2 text-decoration-none" href="#">Follow us :</a>
+                            <ul class="d-flex mt-2 list-unstyled gap-3">
+                                <li>
+                                    <a class="d-block text-light fa-lg facebook rounded-circle p-2" href="#">
+                                        <i class="fa-brands fa-facebook "></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light fa-lg twitter rounded-circle p-2" href="#">
+                                        <i class="fa-brands fa-twitter "></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light linkedin  rounded-circle p-2   fa-lg" href="#">
+                                        <i class="fa-brands fa-linkedin "></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light youtube rounded-circle p-2 fa-lg" href="#">
+                                        <i class="fa-brands fa-youtube   "></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

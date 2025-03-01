@@ -1,0 +1,66 @@
+﻿@using IdentityManager.Models.ViewModels
+@using System.Diagnostics
+@model ExternalLoginConfirmationViewModel
+
+<div class="container mt-5 text-center">
+    <h1>تسجيل الدخول بعد <span id="countdown">5</span> ثوانٍ</h1>
+
+    <p class="text-success text-center pt-2">تم تاكيد ايميل  @ViewData["ProviderDisplayName"] </p>
+    <div class="progress mt-4" style="height: 30px;">
+        <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+             role="progressbar" style="width: 0%;" aria-valuemin="0" aria-valuemax="100">
+        </div>
+    </div>
+
+    <form id="myForm" method="post" asp-controller="Account" asp-action="ExternalLoginConfirmation"
+          asp-route-returnurl="@ViewData["ReturnUrl"]">
+        <div hidden>
+            <input asp-for="Email" />
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input asp-for="Email" class="form-control" />
+
+            <input asp-for="Name" class="form-control" />
+
+        </div>
+
+
+    </form>
+</div>
+
+<!-- jQuery Script -->
+
+
+
+
+
+
+   
+
+@section Scripts {
+    @{
+       <script>
+    $(document).ready(function () {
+        let seconds = 5;
+        const countdown = $('#countdown');
+        const progressBar = $('#progress-bar');
+        const form = document.getElementById('myForm');
+
+        // Function to update countdown and progress bar
+        const timer = setInterval(function () {
+            seconds--;
+            countdown.text(seconds);
+            const progress = ((5 - seconds) / 5) * 100;
+            progressBar.css('width', progress + '%');
+
+            if (seconds <= 0) {
+                clearInterval(timer);
+                form.submit(); // Submit the form
+            }
+        }, 1000);
+    });
+</script>
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

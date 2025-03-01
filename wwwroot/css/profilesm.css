@@ -1,0 +1,17 @@
+﻿.circle-container {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%; /* يجعل الشكل دائري */
+    overflow: hidden; /* إخفاء أي جزء من الصورة يتجاوز الدائرة */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc; /* إضافة حدود رمادية */
+}
+
+    .circle-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* يضمن أن الصورة تملأ الدائرة بالكامل دون تشويه */
+    }

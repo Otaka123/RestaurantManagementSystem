@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "تأكيد الطلب";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="account">
+    <div class="container p-5">
+        <div class="row g-0 shadow-lg rounded overflow-hidden">
+            <div class="col-12 form-section">
+                <h4 class="text-center responsive-title text-white fs-2">Han<span class="text-warning">kol</span></h4>
+                <h3 class="text-center mb-4 responsive-title fs-4">تم تأكيد طلبك بنجاح!</h3>
+
+                <div class="alert alert-success text-center">
+                    <p>رقم الطلب: @ViewBag.OrderId</p>
+                    <p>شكرًا لاختيارك Hancol!</p>
+                </div>
+
+                <p class="text-center mt-2">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-custom">العودة إلى الصفحة الرئيسية</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

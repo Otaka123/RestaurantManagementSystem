@@ -1,0 +1,114 @@
+﻿<!-- قسم اختيار المطعم -->
+@{
+    ViewData["Title"] = "لوحة التحكم";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label>اختر المطعم</label>
+            <select id="restaurantSelect" class="form-control">
+                @if (ViewBag.Restaurants != null)
+                {
+                    @foreach (var restaurant in ViewBag.Restaurants)
+                    {
+                        <option value="@restaurant.Value"
+                                selected="@(restaurant.Value == ViewBag.SelectedRestaurantId.ToString() ? "selected" : null)">
+                            @restaurant.Text
+                        </option>
+                    }
+                }
+                else
+                {
+                    <option value="">-- لايوجد مطعام لعرضها --</option>
+
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<!-- قسم عرض الإحصائيات -->
+<div class="row" id="statsContainer" style="display:none;">
+    <!-- إجمالي الأطباق -->
+    <div class="col-md-3">
+        <div class="info-box bg-info">
+            <span class="info-box-icon"><i class="fa fa-cutlery"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">إجمالي الأطباق</span>
+                <span class="info-box-number" id="totalDishes">0</span>
+            </div>
+        </div>
+    </div>
+    <!-- إجمالي الطلبات -->
+    <div class="col-md-3">
+        <div class="info-box bg-success">
+            <span class="info-box-icon"><i class="fa fa-shopping-cart"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">إجمالي الطلبات</span>
+                <span class="info-box-number" id="totalOrders">0</span>
+            </div>
+        </div>
+    </div>
+    <!-- إجمالي المراجعات -->
+    <div class="col-md-3">
+        <div class="info-box bg-warning">
+            <span class="info-box-icon"><i class="fa fa-comments"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">إجمالي المراجعات</span>
+                <span class="info-box-number" id="totalReviews">0</span>
+            </div>
+        </div>
+    </div>
+    <!-- متوسط التقييم -->
+    <div class="col-md-3">
+        <div class="info-box bg-danger">
+            <span class="info-box-icon"><i class="fa fa-star"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">متوسط التقييم</span>
+                <span class="info-box-number" id="averageRating">0</span>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+                        $(document).ready(function () {
+            // تحديث القائمة عند التحميل
+            const params = new URLSearchParams(window.location.search);
+            const restaurantId = params.get("restaurantId");
+            if (restaurantId) {
+                $("#restaurantSelect").val(restaurantId);
+                fetchStatistics(restaurantId);
+            }
+
+            // عند تغيير الاختيار
+            $("#restaurantSelect").change(function () {
+                const id = $(this).val();
+                if (id) {
+                    window.history.replaceState({}, '', `?restaurantId=${id}`);
+                    fetchStatistics(id);
+                }
+            });
+        });
+
+        async function fetchStatistics(restaurantId) {
+            try {
+                const response = await fetch(`/Restaurants/GetStatistics?restaurantId=${restaurantId}`);
+                const data = await response.json();
+
+                // تحديث العناصر بالإحصائيات
+                $('#totalDishes').text(data.totalDishes);
+                $('#totalOrders').text(data.totalOrders);
+                $('#totalReviews').text(data.totalReviews);
+                $('#averageRating').text(data.averageRating.toFixed(1));
+
+                $('#statsContainer').fadeIn();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('حدث خطأ أثناء جلب البيانات');
+            }
+        }
+
+    </script>
+}

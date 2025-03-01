@@ -1,0 +1,123 @@
+﻿@using UsersApp.ViewModels.restaurant
+@model DishIndexViewModel
+
+<div class="container mt-5">
+    <h1 class="mb-4">قائمة الأطباق</h1>
+
+    <!-- فلترة البحث -->
+    <form asp-action="Index" method="get" class="card p-3 mb-4 shadow-sm">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">الفئة:</label>
+                <select asp-for="Filter.CategoryId"
+                        asp-items="ViewBag.Categories"
+                        class="form-select">
+                    <option value="">كل الفئات</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">المطعم:</label>
+                <select asp-for="Filter.RestaurantId"
+                        asp-items="Model.Restaurants"
+                        class="form-select">
+                    <option value="">كل المطاعم</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">نطاق السعر:</label>
+                <div class="input-group">
+                    <input asp-for="Filter.MinPrice" type="number"
+                           class="form-control" placeholder="الحد الأدنى">
+                    <input asp-for="Filter.MaxPrice" type="number"
+                           class="form-control" placeholder="الحد الأقصى">
+                </div>
+            </div>
+
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-filter"></i> تطبيق الفلترة
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- عرض الأطباء -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var dish in Model.PagedDishes.Items)
+        {
+            <div class="col">
+                <div class="card h-100 shadow">
+                    <img src="@dish.PictureUrl"
+                         class="card-img-top dish-image"
+                         alt="@dish.Name">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@dish.Name</h5>
+                        <div class="rating mb-2">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <i class="fas fa-star @(i < dish.Rating ? "text-warning" : "text-muted")"></i>
+                            }
+                        </div>
+                        <p class="card-text text-muted">@dish.Description</p>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-info">
+                                @dish.CategoryName
+                            </span>
+                            <span class="h5 text-success">@dish.Price.ToString("C")</span>
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-transparent">
+                        <a asp-action="Details" asp-route-id="@dish.Id"
+                           class="btn btn-outline-primary w-100">
+                            <i class="fas fa-info-circle"></i> التفاصيل
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- التقسيم إلى صفحات -->
+    @if (Model.PagedDishes.TotalCount > 1)
+    {
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= Model.PagedDishes.TotalCount; i++)
+                {
+                    <li class="page-item @(i == Model.PagedDishes.PageNumber ? "active" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("Index", new { pageNumber = i })">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+</div>
+
+@section Styles {
+    <style>
+        .dish-image {
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            }
+
+        .rating {
+            color: #ffc107;
+        }
+    </style>
+}

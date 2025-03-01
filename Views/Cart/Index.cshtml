@@ -1,0 +1,232 @@
+﻿@using UsersApp.ViewModels.Cart
+@model CartViewModel
+
+<div class="container mt-5">
+    <h2 class="mb-4">سلة التسوق</h2>
+    @if (Model?.Items?.Any() == true)
+    {
+        <div class="row">
+            <div class="col-md-8">
+                @foreach (var item in Model.Items)
+                {
+                    <div class="card mb-3 shadow-sm">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="@item.ImageUrl"
+                                     class="img-fluid rounded-start"
+                                     alt="@item.DishName"
+                                     style="max-height: 200px; object-fit: cover;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.DishName</h5>
+                                    <p class="card-text text-muted">@item.Description</p>
+
+                                    <div class="d-flex justify-content-start align-items-center ">
+                                        <div class="input-group " style="width: 80px;">
+                                            <input type="number"
+                                                   class="form-control text-center "
+                                                   value="@item.Quantity"
+                                                   min="1"
+                                                   data-dish-id="@item.Dishid">
+                                         
+                                        </div>
+                                        <div>
+                                            <span class="h5 text-warning ms-2 me-2">
+                                                @((item.UnitPrice * item.Quantity).ToString("C"))
+                                            </span>
+                                        </div>
+                                              <div class="d-flex ">
+                                            <form asp-action="AddItem" asp-route-dishId="@item.Dishid"  asp-controller="Cart" method="post">
+
+                                                <button type="submit" class="btn btn-primary">+</button>
+
+                                            </form>
+                                            <form class="ms-2 " asp-controller="Cart" asp-action="RemoveItem" asp-route-Dishid="@item.Dishid" method="post">
+                                                <button type="submit" class="ps-3 pe-3 btn btn-danger">-</button>
+                                            </form>
+
+                                        </div>                              
+                                                                                
+                                        @* Decrement button *@
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">ملخص الطلب</h5>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="fw-bold">الإجمالي:</span>
+                            <span class="h5 text-primary">@Model.GrandTotal.ToString("C")</span>
+                        </div>
+
+                        <a asp-controller="Order" asp-route-shopoingcartid="@Model.CartId" asp-action="Checkout"
+                         
+                           class="btn btn-primary w-100 py-2">
+
+                            إتمام الشراء
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+    }
+    else
+    {
+        <div class="alert alert-secondary text-center ">
+            <i class="fas fa-shopping-cart fa-2x mb-3"></i>
+            <h4>سلة التسوق فارغة</h4>
+            <a asp-controller="Customer" asp-action="Index" class="btn btn-custom mt-2">
+                تصفح القائمة
+            </a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+                $(document).ready(function () {
+            // الاتصال بـ SignalR Hub
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/cartHub")
+                .build();
+
+            // تحديث العدد عند استقبال البيانات
+            connection.on("ReceiveCartCount", function (count) {
+                $("#cartCount").text(count);
+            });
+
+            // بدء الاتصال
+            connection.start().catch(function (err) {
+                console.error(err.toString());
+            });
+
+            // إضافة عنصر إلى السلة
+            $(".add-to-cart").click(async function () {
+                const dishId = $(this).data("dish-id");
+                const response = await fetch(`/Cart/AddItem/${dishId}`, {
+                    method: "POST",
+                    headers: {
+                        "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+                    }
+                });
+                const result = await response.json();
+                if (result.success) {
+                    toastr.success("تمت إضافة العنصر إلى السلة");
+                } else {
+                    toastr.error(result.message);
+                }
+            });
+
+            // حذف عنصر من السلة
+            $(".remove-from-cart").click(async function () {
+                const dishId = $(this).data("dish-id");
+                const response = await fetch(`/Cart/RemoveItem/${dishId}`, {
+                    method: "POST",
+                    headers: {
+                        "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+                    }
+                });
+                const result = await response.json();
+                if (result.success) {
+                    toastr.success("تم حذف العنصر من السلة");
+                } else {
+                    toastr.error(result.message);
+                }
+            });
+        });
+        // $(document).ready(function() {
+        //     $('.update-qty').click(async function() {
+        //         const dishId = $(this).siblings('input').data('dish-id');
+        //         const quantity = $(this).siblings('input').val();
+
+        //         const response = await fetch(`/Cart/UpdateItem/${dishId}?quantity=${quantity}`, {
+        //             method: 'POST',
+        //             headers: {
+        //                 'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+        //             }
+        //         });
+
+        //         if (response.ok) {
+        //             location.reload();
+        //         }
+        //     });
+
+        //     $('.remove-item').click(async function() {
+        //         const dishId = $(this).data('dish-id');
+
+        //         const response = await fetch(`/Cart/RemoveItem/${dishId}`, {
+        //             method: 'POST',
+        //             headers: {
+        //                 'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+        //             }
+        //         });
+
+        //         if (response.ok) {
+        //             location.reload();
+        //         }
+        //     });
+        // });
+
+               $(document).ready(function() {
+            // الاتصال بـ SignalR Hub
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/cartHub")
+                .build();
+
+            // تحديث العدد عند استقبال البيانات
+            connection.on("ReceiveCartCount", function(count) {
+                $("#cartCount").text(count);
+            });
+
+            // بدء الاتصال
+            connection.start().catch(function(err) {
+                console.error(err.toString());
+            });
+
+            // إضافة عنصر إلى السلة
+            $(".add-to-cart").click(async function() {
+                const dishId = $(this).data("dish-id");
+                const response = await fetch(`/Cart/AddItem/${dishId}`, {
+                    method: "POST",
+                    headers: {
+                        "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+                    }
+                });
+                const result = await response.json();
+                if (result.success) {
+                    toastr.success("تمت إضافة العنصر إلى السلة");
+                } else {
+                    toastr.error(result.message);
+                }
+            });
+
+            // حذف عنصر من السلة
+            $(".remove-from-cart").click(async function() {
+                const dishId = $(this).data("dish-id");
+                const response = await fetch(`/Cart/RemoveItem/${dishId}`, {
+                    method: "POST",
+                    headers: {
+                        "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val()
+                    }
+                });
+                const result = await response.json();
+                if (result.success) {
+                    toastr.success("تم حذف العنصر من السلة");
+                } else {
+                    toastr.error(result.message);
+                }
+            });
+        });
+    </script>
+}

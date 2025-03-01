@@ -1,0 +1,12 @@
+﻿@model string
+
+<h2>إضافة دور جديد</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="roleName">اسم الدور</label>
+        <input type="text" id="roleName" name="roleName" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">حفظ</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary mt-2">إلغاء</a>
+</form>

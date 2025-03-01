@@ -1,0 +1,90 @@
+﻿@using UsersApp.ViewModels
+@model OrderViewModel
+@{
+    ViewData["Title"] = "الدفع";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="account">
+    <div class="container p-5">
+      
+
+        <div class="row g-0 shadow-lg rounded overflow-hidden">
+            <div class="col-md-6 d-none d-md-block">
+                <div class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
+                    <h4 class="text-center responsive-title text-secondary mb-4 fs-2">Han<span class="text-warning">kol</span></h4>
+                    <p class="text-center text-capitalize text-black-50 mb-4">We are wating your order</p>
+                    <img src="/images/OrdersImages/delivery.png" class="img-fluid rounded-image w-75" alt="Dining Image">
+                </div>
+            </div>
+            <div class="col-12 col-md-6 form-section">
+                <h4 class="text-center d-md-none responsive-title text-white fs-2">Han<span class="text-warning">kol</span></h4>
+                <h3 class="text-center mb-4 responsive-title fs-4">Hungry? You are in the right place!</h3>
+
+                <form asp-action="Checkout" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input hidden asp-for="UserId" />
+
+                    @if (Model.OrderDetails.Count()>0)
+                    {
+                        @for (int i = 0; i < Model.OrderDetails.Count; i++)
+                        {
+                            <input hidden asp-for="@Model.OrderDetails[i].Restaurantid" />
+                            <input type="hidden" name="OrderDetails[@i].DishId" value="@Model.OrderDetails[i].DishId" />
+                            <input type="hidden" name="OrderDetails[@i].Quantity" value="@Model.OrderDetails[i].Quantity" />
+                            <input type="hidden" name="OrderDetails[@i].UnitPrice" value="@Model.OrderDetails[i].UnitPrice" />
+                            <input type="hidden" name="OrderDetails[@i].DishName" value="@Model.OrderDetails[i].DishName" />
+
+                        }
+                    }
+                    <input hidden asp-for="TotalPrice" />
+
+                    <div class="form-group form-input">
+                        <input asp-for="Name" type="text" name="Name" placeholder=" " required />
+                        <label asp-for="Name" class="form-label"></label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-input">
+                        <input asp-for="Email" type="email" name="Email" placeholder=" " required />
+                        <label asp-for="Email" class="form-label"></label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-input">
+                        <input asp-for="MobileNumber" type="text" name="MobileNumber" placeholder=" " required />
+                        <label asp-for="MobileNumber" class="form-label"></label>
+                        <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-input">
+                        <input asp-for="Address" type="text" name="Address" placeholder=" " required />
+                        <label asp-for="Address" class="form-label"></label>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-input">
+                        <select asp-for="PaymentMethod" class="form-control" required>
+                            <option value="">اختر طريقة الدفع</option>
+                            @* <option value="CreditCard">بطاقة ائتمان</option> *@
+                            <option value="CashOnDelivery">الدفع عند الاستلام</option>
+                        </select>
+                        @* <label asp-for="PaymentMethod" class="form-label"></label> *@
+                        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                    </div>
+
+                    <input type="submit" value="تأكيد الطلب" class="btn btn-custom w-100 p-2" />
+                    <p class="text-center mt-2">
+                        <a asp-controller="Home" asp-action="Index" class="text-decoration-none">العودة إلى الصفحة الرئيسية</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

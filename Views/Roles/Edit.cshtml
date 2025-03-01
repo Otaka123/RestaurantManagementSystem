@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+
+<h2>تعديل الدور</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="form-group">
+        <label for="newRoleName">اسم الدور الجديد</label>
+        <input type="text" id="newRoleName" name="newRoleName" value="@Model.Name" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">تحديث</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary mt-2">إلغاء</a>
+</form>

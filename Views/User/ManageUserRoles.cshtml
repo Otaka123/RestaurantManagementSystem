@@ -1,0 +1,36 @@
+﻿
+@using UsersApp.ViewModels
+@model List<ManageroleViewModel>
+
+<h2>إدارة أدوار المستخدم: @ViewBag.UserName</h2>
+
+<form asp-action="ManageUserRoles" method="post">
+    <input type="hidden" name="userId" value="@ViewBag.UserId" />
+    <div>
+        <table class="table table-bordered table-striped table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>اسم الدور</th>
+                    <th>محدد</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model[i].RoleName
+                            <input type="hidden" name="[@i].RoleName" value="@Model[i].RoleName" />
+                            <input type="hidden" name="[@i].RoleId" value="@Model[i].RoleId" />
+                        </td>
+                        <td>
+                            <input type="checkbox" name="[@i].IsSelected" value="true" @(Model[i].IsSelected ? "checked" : "") />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary mt-3">حفظ التعديلات</button>
+        <a asp-action="UsersWithRoles" class="btn btn-secondary mt-3">إلغاء</a>
+    </div>
+</form>
