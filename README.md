@@ -14,8 +14,6 @@ This project is a complete system for managing restaurants and food orders using
 
 ## 📸 Screenshots
 
-## 📸 Screenshots
-
 <p align="center">
   <img src="https://github.com/Otaka123/RestaurantManagementSystem/raw/master/ScreenShots/1%20(1).png" width="250">
   <img src="https://github.com/Otaka123/RestaurantManagementSystem/raw/master/ScreenShots/1%20(2).png" width="250">
