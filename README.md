@@ -15,34 +15,34 @@ This project is a complete system for managing restaurants and food orders using
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="Screenshots/1 (1).png" width="100">
-  <img src="Screenshots/1 (2).png" width="100">
-  <img src="Screenshots/1 (3).png" width="100">
-  <img src="Screenshots/1 (4).png" width="100">
-  <img src="Screenshots/1 (5).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (1).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (2).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (3).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (4).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (5).png" width="100">
 </p>
 
 <p align="center">
-  <img src="Screenshots/1 (6).png" width="100">
-  <img src="Screenshots/1 (7).png" width="100">
-  <img src="Screenshots/1 (8).png" width="100">
-  <img src="Screenshots/1 (9).png" width="100">
-  <img src="Screenshots/1 (10).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (6).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (7).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (8).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (9).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (10).png" width="100">
 </p>
 
 <p align="center">
-  <img src="Screenshots/1 (11).png" width="100">
-  <img src="Screenshots/1 (12).png" width="100">
-  <img src="Screenshots/1 (13).png" width="100">
-  <img src="Screenshots/1 (14).png" width="100">
-  <img src="Screenshots/1 (15).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (11).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (12).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (13).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (14).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (15).png" width="100">
 </p>
 
 <p align="center">
-  <img src="Screenshots/1 (16).png" width="100">
-  <img src="Screenshots/1 (17).png" width="100">
-  <img src="Screenshots/1 (18).png" width="100">
-  <img src="Screenshots/1 (19).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (16).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (17).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (18).png" width="100">
+  <img src="https://github.com/Otaka123/RestaurantManagementSystem/Screenshots/1 (19).png" width="100">
 </p>
 
 
